@@ -1,0 +1,7 @@
+.dailymotion-player {
+    padding: 2%;
+  }
+
+.dailymotion-player form{
+  visibility:hidden;
+}

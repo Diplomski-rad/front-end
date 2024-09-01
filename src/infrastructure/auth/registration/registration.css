@@ -1,0 +1,21 @@
+.registration-container{
+    display: flex;
+    flex-direction: column;
+    padding: 5%;
+}
+
+.registration-form{
+    display: flex;
+    flex-direction: column;
+    justify-self: center;
+    align-self: center;
+    background-color: white;
+    padding: 2%;
+    border-radius: 10px;
+    width: 30%;
+    box-shadow: 0 5px 8px rgba(255, 255, 255, 0.2);
+}
+
+.signup-header{
+    align-self: center;
+}

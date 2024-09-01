@@ -1,0 +1,100 @@
+.not-purchased-container{
+    display: flex;
+    flex-direction: column;
+    padding: 2%;
+}
+
+.course-header{
+    display: flex;
+    flex-direction: row;
+    box-sizing: border-box;
+    border-bottom: 2px solid white;
+    padding-bottom: 1%;
+}
+
+.title{
+    align-self: flex-end;
+    margin-left: 1%;
+    width: 70%;
+    box-sizing: border-box;
+}
+
+.title h1{
+    margin: 0px;
+    color: white;
+    font-size: 48px;
+}
+
+.author{
+    color: white;
+}
+
+.buy-container{
+    padding-top: 2%;
+    display: flex;
+    flex-direction: row;
+}
+
+.buy-container button{
+    background-color: orange;
+    outline: none;
+    border: 0px;
+    color: white;
+    padding: 10px;
+    padding-left: 5em;
+    padding-right: 5em;
+    border-radius: 20px;
+    margin-left: 2em;
+    font-size: 24px;
+    transition: background-color 0.2s, transform 0.2s;
+}
+
+.buy-container button:hover{
+    cursor: pointer;
+    transform: scale(1.05);
+    border: 0px;
+    outline: none;
+}
+
+.price{
+    color: white;
+    font-size: 32px;
+    font-weight: bold;
+}
+
+
+.image{
+    border: 1px solid black;
+    width: 30%; 
+    min-width: 350px;
+    height: 350px; /* Set a fixed height */
+    box-sizing: border-box;
+}
+
+.image img {
+    width: 100%;
+    height: 100%;
+    object-fit:cover;
+}
+
+
+
+.course-description{
+    display: flex;
+    flex-direction: column;
+    padding-top: 2%;
+}
+
+
+
+.description{
+    color: white;
+    font-size: 24px;
+}
+
+
+
+.author h2{
+    margin: 0px;
+    font-style: italic;
+}

@@ -1,0 +1,13 @@
+.landingPageContainer{
+    display: flex;
+    flex-direction: column;
+    padding: 2%;
+
+}
+
+.courses{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+}

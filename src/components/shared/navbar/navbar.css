@@ -1,0 +1,60 @@
+.navbar{
+    display: flex;
+    flex-direction:row;
+    background-color: maroon;
+    justify-content: space-between;
+    padding: 10px;
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 1000;
+}
+
+.navbar-items-group{
+    display: flex;
+    flex-direction: row;
+}
+
+.navbar-login-btn{
+    padding: 10px;
+    padding-left: 20px;
+    padding-right: 20px;
+    margin: 5px;
+    margin-right: 20px;
+    border-radius: 10px;
+    border: 0px;
+}
+
+.navbar-login-btn:hover{
+    cursor: pointer;
+}
+
+.navbar-item{
+    padding: 10px;
+    /* border-radius: 10px; */
+    color: white;
+    font-variant: small-caps;
+    font-size: 18px;
+}
+
+.navbar-item:hover{
+    cursor: pointer;
+    /* background-color: rgb(91, 0, 0); */
+    border-bottom: 2px solid white;
+}
+
+.navbar-username-container{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.navbar-username{
+    padding-right: 20px;
+    color: white;
+    cursor: default;
+}
+
+body {
+    padding-top: 60px; /* Adjust this value based on the height of your navbar */
+}

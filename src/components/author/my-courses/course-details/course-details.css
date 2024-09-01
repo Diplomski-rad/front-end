@@ -1,0 +1,69 @@
+.course-details-container {
+    padding: 2%;
+    display: flex;
+    flex-direction: column;
+    box-sizing: border-box;
+    min-height: 100vh; /* Ensure the container takes at least the full viewport height */
+}
+
+
+
+.course-header {
+    color: white;
+    flex: 0 0 auto; /* Prevent the header from shrinking or growing */
+    border-bottom: 1px solid white;
+    font-size: 54px;
+    padding-bottom: 20px;
+}
+
+
+
+.course-description {
+    padding: 20px;
+    color: white;
+    font-size: 20px;
+    flex: 0 0 auto; /* Prevent the description from shrinking or growing */
+    border-bottom: 1px solid white;
+}
+
+.course-videos {
+    margin-top: 1%;
+    width: 100%;
+    box-sizing: border-box;
+    flex-grow: 1; /* Allow this section to grow and take up remaining space */
+    overflow-y: auto; /* Enable vertical scrolling if content overflows */
+}
+
+.buttons-container{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.add-video-to-course{
+    background-color: #45a049;
+    align-self: center;
+    padding: 20px;
+    border-radius: 10px;
+    margin: 20px;
+    font-variant: small-caps;
+    font-weight: bold;
+    font-size: 24px;
+    transition: background-color 0.1s, transform 0.1s;
+    color: white;
+
+}
+
+.add-video-to-course:hover{
+    cursor: pointer;
+    background-color: #4CAF50; 
+    transform: scale(1.05);
+}
+
+.no-videos-yet{
+    color: white;
+    font-size: 24px;
+    text-align: center;
+    font-family: 'Courier New', Courier, monospace;
+    margin-top: 5%;
+}

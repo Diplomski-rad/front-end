@@ -1,0 +1,10 @@
+.success-container{
+    color: white;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 80vh;
+    box-sizing: border-box;
+}
+

@@ -1,0 +1,61 @@
+.my-courses-dashboard-container{
+    display: flex;
+    flex-direction: column;
+    padding: 4%;
+    padding-top: 1%;
+}
+
+.header-container{
+    align-self: center;
+    color: white;
+}
+
+.my-courses-dashboard-container .button-container button {
+    align-self: flex-start;
+    padding: 12px 20px; 
+    border-radius: 8px; 
+    margin-bottom: 20px;
+    font-size: 18px; 
+    font-variant: small-caps;
+    background-color: #4CAF50; 
+    color: white;
+    border: none; 
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); 
+    transition: background-color 0.3s, transform 0.3s; 
+}
+
+.my-courses-dashboard-container .button-container button:hover {
+    cursor: pointer;
+    background-color: #45a049;
+    transform: scale(1.05);
+}
+
+.my-courses-dashboard-container .button-container button:focus {
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(0, 128, 0, 0.3);
+}
+
+.my-dashboard{
+    display: flex;
+    flex-direction: column;
+    border-radius: 10px;
+}
+
+.add-course{
+    background-color: white;
+    padding: 2%;
+    display : flex;
+    flex-direction: row;
+    width: 25%;
+    margin-bottom: 20px;
+    height: 25%;
+    border-radius: 10px;
+}
+
+.no-course-yet{
+    color: white;
+    font-size: 24px;
+    text-align: center;
+    font-family: 'Courier New', Courier, monospace;
+    margin-top: 5%;
+}

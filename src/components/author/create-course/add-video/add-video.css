@@ -1,0 +1,89 @@
+.course-form-container {
+    display: flex;
+    padding: 5%;
+    align-items: center;
+    justify-content: center;
+}
+
+
+.course-form-container form {
+    display: flex;
+    flex-direction: column;
+    background-color: white;
+    padding: 2rem;
+    width: 100%;
+    max-width: 600px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); 
+}
+
+
+.course-form-container form h1 {
+    text-align: center;
+    color: #333; 
+    margin-bottom: 1.5rem; 
+}
+
+
+.input-container {
+    margin-bottom: 1rem; 
+}
+
+
+.input-container div {
+    margin-bottom: 0.5rem;
+    font-size: 1rem;
+    font-weight: bold;
+    color: #555;
+}
+
+
+.login-input {
+    width: 100%;
+    padding: 0.8rem;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    font-size: 1rem;
+    box-sizing: border-box; 
+}
+
+
+.course-form-container form textarea {
+    width: 95%;
+    padding: 0.8rem;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    resize: vertical; 
+}
+
+.button-container {
+    display: flex;
+    justify-content: center;
+    margin-top: 1.5rem;
+}
+
+.login-button {
+    padding: 0.8rem 1.5rem;
+    border: none;
+    border-radius: 5px;
+    background-color: #4CAF50;
+    color: white;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.2s;
+}
+
+.login-button:hover {
+    background-color: #45a049;
+    transform: scale(1.05);
+    color: white;
+}
+
+.login-button:focus {
+    outline: none; 
+    box-shadow: 0 0 0 3px rgba(0, 128, 0, 0.3);
+}
+
+.error-message{
+    color: red;
+}
