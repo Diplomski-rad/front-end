@@ -1,18 +1,20 @@
 import React from "react";
-import "./video_player.css";
+import styles from "./video_player.module.css";
 import DailymotionPlayer from "../dailymotion-player/dailymotion-player";
 import { useLocation } from "react-router-dom";
+import Video from "../model/Video";
 
 const VideoPlayer: React.FC = () => {
   const location = useLocation();
-  const { videoId } = location.state as { videoId: string };
-
-  console.log(videoId);
+  const { video } = location.state as { video: Video };
 
   return (
-    <div className="video-container">
+    <div className={styles["video-container"]}>
       <div>
-        <DailymotionPlayer videoId={videoId} />
+        <div className={styles["title-container"]}>
+          <h1>{video.title}</h1>
+        </div>
+        <DailymotionPlayer videoId={video.id} />
       </div>
     </div>
   );

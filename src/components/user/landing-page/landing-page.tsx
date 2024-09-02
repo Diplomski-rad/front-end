@@ -22,7 +22,7 @@ const LandingPage: React.FC = () => {
 
   return (
     <div className={styles.landingPageContainer}>
-      <Searchbar />
+      <Searchbar setSearchResult={setCourses} />
       <div className={styles.courses}>
         {courses.map((course) => (
           <LandingCourse key={course.id} course={course} />

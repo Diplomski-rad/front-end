@@ -19,13 +19,10 @@ const PaymentSuccess: React.FC = () => {
       const payerId = urlParams.get("PayerID");
 
       try {
-        const response = await axiosWithBearer.post(
-          "http://localhost:5217/api/cart/checkout",
-          {
-            paymentId,
-            payerId,
-          }
-        );
+        await axiosWithBearer.post("http://localhost:5217/api/cart/checkout", {
+          paymentId,
+          payerId,
+        });
 
         navigate("/successful-payment");
       } catch (error) {

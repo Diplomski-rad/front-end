@@ -38,6 +38,7 @@ const DailymotionPlayer: React.FC<DailymotionPlayerProps> = ({ videoId }) => {
         //   allowFullScreen
         // ></iframe>
         <iframe
+          title="Video player"
           width="100%"
           height="100%"
           src={url}

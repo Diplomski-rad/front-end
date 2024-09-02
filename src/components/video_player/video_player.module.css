@@ -4,3 +4,12 @@
     padding: 2%;
     box-sizing: border-box;
   }
+
+.title-container{
+  color: white;
+  margin-bottom: 1%;
+}
+
+.title-container h1{
+  margin: 0px;
+}

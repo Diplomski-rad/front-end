@@ -43,6 +43,19 @@ export const getPublishedCourses = async (): Promise<Course[]> => {
   }
 };
 
+export const searchCourses = async (query: string): Promise<Course[]> => {
+  try {
+    const response = await axiosWithBearer.get<Course[]>(
+      `${enviroment.apiHost}/api/course/search`,
+      { params: { query } }
+    );
+    return response.data;
+  } catch (error) {
+    console.error("Error fetching searched courses:", error);
+    throw error;
+  }
+};
+
 export const getPurchasedCourses = async (
   userId: number
 ): Promise<Course[]> => {

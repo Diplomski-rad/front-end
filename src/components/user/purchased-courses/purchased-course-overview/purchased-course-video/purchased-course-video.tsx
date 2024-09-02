@@ -13,10 +13,8 @@ const PurchasedCourseVideo: React.FC<PurchasedCourseVideoProps> = ({
 }) => {
   const navigate = useNavigate();
 
-  const videoId = video.id;
-
   const handleVideoClick = () => {
-    navigate("/video-player", { state: { videoId } });
+    navigate("/video-player", { state: { video } });
   };
 
   return (
