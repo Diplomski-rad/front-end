@@ -47,14 +47,75 @@
     display: flex;
     flex-direction: row;
     align-items: center;
+    margin-right: 1%;
+    padding-right: 1%;
+    padding-left: 1%;
+    border-radius: 10px;
+    max-width: 250px;
 }
 
+
+
 .navbar-username{
-    padding-right: 20px;
     color: white;
     cursor: default;
+    max-width: 200px;
+    overflow: hidden;
+}
+
+.navbar-image{
+    height: 25px;
+    margin-right: 10px;
+}
+
+.navbar-image img{
+    object-fit: contain;
+    height: 100%;
+    width: 100%;
+}
+
+.navbar-username-container:hover{
+    /* background-color: rgb(165, 39, 39); */
+    background-color: rgb(173, 3, 3);
+    cursor: pointer;
+}
+
+.navbar-username:hover{
+    cursor: pointer;
 }
 
 body {
     padding-top: 60px; /* Adjust this value based on the height of your navbar */
+}
+
+.opened{
+    background-color: rgb(173, 3, 3);
+}
+
+.not-opened{
+    background-color: maroon;
+}
+
+
+
+.navbar-dropdown {
+    position: absolute;
+    top: 100%;
+    right: 1%;
+    background-color: rgb(173, 3, 3);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    border-radius: 4px;
+    z-index: 1000;
+}
+
+.navbar-dropdown-item {
+    padding: 30px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    color: white;
+    cursor: pointer;
+}
+
+.navbar-dropdown-item:hover {
+    background-color: rgb(91, 0, 0);
 }

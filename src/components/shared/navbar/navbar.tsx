@@ -1,13 +1,17 @@
-import React from "react";
-import "./navbar.css";
+import React, { useEffect, useRef, useState } from "react";
+import styles from "./navbar.module.css";
 import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { removeUser } from "../../../infrastructure/redux/slice/userSlice";
 import { jwtDecode } from "jwt-decode";
+import profileImage from "../../../assets/user.png";
 
 const Navbar: React.FC = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
+
+  const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+  const dropdownRef = useRef<HTMLDivElement | null>(null);
 
   const isLoggedIn = localStorage.getItem("token");
 
@@ -57,56 +61,90 @@ const Navbar: React.FC = () => {
     localStorage.removeItem("token");
     dispatch(removeUser());
     navigate("/login");
+    setIsDropdownOpen(false);
   };
 
+  const toggleDropdown = () => {
+    setIsDropdownOpen(!isDropdownOpen);
+  };
+
+  const handleClickOutside = (event: MouseEvent) => {
+    if (
+      dropdownRef.current &&
+      !dropdownRef.current.contains(event.target as Node)
+    ) {
+      setIsDropdownOpen(false);
+    }
+  };
+
+  useEffect(() => {
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, []);
+
   return (
-    <div className="navbar">
-      <div className="navbar-items-group">
-        <div className="navbar-item" onClick={handleHomeClick}>
+    <div className={styles.navbar}>
+      <div className={styles["navbar-items-group"]}>
+        <div className={styles["navbar-item"]} onClick={handleHomeClick}>
           home
         </div>
 
-        {/* {isAuthor && (
-          <div className="navbar-item" onClick={handleCreateCourseClick}>
-            add course
-          </div>
-        )} */}
-
         {isUser && (
-          <div className="navbar-item" onClick={handleCoursesClick}>
+          <div className={styles["navbar-item"]} onClick={handleCoursesClick}>
             courses
           </div>
         )}
 
         {isUser && (
-          <div className="navbar-item" onClick={handlePurchasedCoursesClick}>
+          <div
+            className={styles["navbar-item"]}
+            onClick={handlePurchasedCoursesClick}
+          >
             purchased courses
           </div>
         )}
 
         {isAuthor && (
-          <div className="navbar-item" onClick={handleMyCoursesClick}>
+          <div className={styles["navbar-item"]} onClick={handleMyCoursesClick}>
             my courses
           </div>
         )}
-
-        {/* <div className="navbar-item" onClick={handleVideoPlayerClick}>
-          video player
-        </div> */}
-
-        {/* <div className="navbar-item" onClick={handleVideoUploaderClick}>
-          video uploader
-        </div> */}
       </div>
-      {isLoggedIn ? (
-        <div className="navbar-username-container">
-          <div className="navbar-username">{decodedToken?.sub}</div>
-          <button className="navbar-login-btn" onClick={handleLogoutClick}>
+
+      {isDropdownOpen && (
+        <div className={styles["navbar-dropdown"]} ref={dropdownRef}>
+          <div className={styles["navbar-dropdown-item"]}>Profile</div>
+
+          <div
+            className={styles["navbar-dropdown-item"]}
+            onClick={handleLogoutClick}
+          >
             Logout
-          </button>
+          </div>
+        </div>
+      )}
+
+      {isLoggedIn ? (
+        <div
+          className={`${styles["navbar-username-container"]} ${
+            isDropdownOpen ? styles.opened : styles["not-opened"]
+          }`}
+          onClick={toggleDropdown}
+        >
+          <div className={styles["navbar-image"]}>
+            <img src={profileImage} alt="" />
+          </div>
+          <div className={styles["navbar-username"]} onClick={toggleDropdown}>
+            {decodedToken?.sub}
+          </div>
         </div>
       ) : (
-        <button className="navbar-login-btn" onClick={handleLoginClick}>
+        <button
+          className={styles["navbar-login-btn"]}
+          onClick={handleLoginClick}
+        >
           Login
         </button>
       )}
