@@ -13,6 +13,15 @@
 .navbar-items-group{
     display: flex;
     flex-direction: row;
+    flex-grow: 7;
+}
+
+.right-group{
+    display: flex;
+    flex-direction: row;
+    max-width: 300px;
+    flex-grow: 3;
+    justify-content: flex-end;
 }
 
 .navbar-login-btn{
@@ -39,7 +48,6 @@
 
 .navbar-item:hover{
     cursor: pointer;
-    /* background-color: rgb(91, 0, 0); */
     border-bottom: 2px solid white;
 }
 
@@ -47,13 +55,31 @@
     display: flex;
     flex-direction: row;
     align-items: center;
-    margin-right: 1%;
-    padding-right: 1%;
-    padding-left: 1%;
+    margin-right: 10%;
+    padding-right: 5%;
+    padding-left: 5%;
     border-radius: 10px;
     max-width: 250px;
+    overflow: hidden;
 }
 
+.navbar-cart{
+    height: 25px;
+    align-self: center;
+    margin-right: 30px;
+    border-radius: 10px;
+}
+
+.navbar-cart:hover{
+    cursor: pointer;
+    
+}
+
+.navbar-cart img{
+    height: 100%;
+    width: 100%;
+    object-fit: contain;
+}
 
 
 .navbar-username{
@@ -61,6 +87,8 @@
     cursor: default;
     max-width: 200px;
     overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
 }
 
 .navbar-image{

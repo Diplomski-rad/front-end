@@ -5,6 +5,7 @@ import { useDispatch } from "react-redux";
 import { removeUser } from "../../../infrastructure/redux/slice/userSlice";
 import { jwtDecode } from "jwt-decode";
 import profileImage from "../../../assets/user.png";
+import cartImage from "../../../assets/grocery-store.png";
 
 const Navbar: React.FC = () => {
   const navigate = useNavigate();
@@ -126,28 +127,33 @@ const Navbar: React.FC = () => {
         </div>
       )}
 
-      {isLoggedIn ? (
-        <div
-          className={`${styles["navbar-username-container"]} ${
-            isDropdownOpen ? styles.opened : styles["not-opened"]
-          }`}
-          onClick={toggleDropdown}
-        >
-          <div className={styles["navbar-image"]}>
-            <img src={profileImage} alt="" />
-          </div>
-          <div className={styles["navbar-username"]} onClick={toggleDropdown}>
-            {decodedToken?.sub}
-          </div>
+      <div className={styles["right-group"]}>
+        <div className={styles["navbar-cart"]}>
+          <img src={cartImage} alt="" />
         </div>
-      ) : (
-        <button
-          className={styles["navbar-login-btn"]}
-          onClick={handleLoginClick}
-        >
-          Login
-        </button>
-      )}
+        {isLoggedIn ? (
+          <div
+            className={`${styles["navbar-username-container"]} ${
+              isDropdownOpen ? styles.opened : styles["not-opened"]
+            }`}
+            onClick={toggleDropdown}
+          >
+            <div className={styles["navbar-image"]}>
+              <img src={profileImage} alt="" />
+            </div>
+            <div className={styles["navbar-username"]} onClick={toggleDropdown}>
+              {decodedToken?.sub}
+            </div>
+          </div>
+        ) : (
+          <button
+            className={styles["navbar-login-btn"]}
+            onClick={handleLoginClick}
+          >
+            Login
+          </button>
+        )}
+      </div>
     </div>
   );
 };
