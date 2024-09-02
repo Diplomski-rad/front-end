@@ -1,4 +1,5 @@
 import Author from "./Author";
+import Video from "./Video";
 
 interface Course {
   id: number;
@@ -7,8 +8,7 @@ interface Course {
   price: number;
   status: number;
   author: Author;
-  playlistId: string;
-  videos: [];
+  videos: Video[];
 }
 
 export default Course;

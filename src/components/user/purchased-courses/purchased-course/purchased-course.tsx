@@ -1,11 +1,11 @@
 import React from "react";
 import styles from "./purchased-course.module.css";
 import authorCourseImage from "../../../../assets/author_course.jpg";
-import PurchasedCourseModel from "../../../model/PurchasedCourse";
 import { useNavigate } from "react-router-dom";
+import Course from "../../../model/Course";
 
 interface PurchasedCourseProps {
-  course: PurchasedCourseModel;
+  course: Course;
 }
 
 const PurchasedCourse: React.FC<PurchasedCourseProps> = ({ course }) => {

@@ -1,8 +1,21 @@
 import { enviroment } from "../../env/enviroment";
 import axiosWithBearer from "../../infrastructure/auth/jwt/jwt.interceptor";
 import Course from "../model/Course";
-import PurchasedCourseModel from "../model/PurchasedCourse";
+import CreateCourseModel from "../model/createCourseModel";
 import Video from "../model/Video";
+
+export const addCourse = async (model: CreateCourseModel): Promise<number> => {
+  try {
+    const response = await axiosWithBearer.post<number>(
+      enviroment.apiHost + "/api/course/create",
+      model
+    );
+    return response.data;
+  } catch (error) {
+    console.error("Error creating course", error);
+    throw error;
+  }
+};
 
 export const getCoursesByAuthor = async (
   authorId: number
@@ -32,9 +45,9 @@ export const getPublishedCourses = async (): Promise<Course[]> => {
 
 export const getPurchasedCourses = async (
   userId: number
-): Promise<PurchasedCourseModel[]> => {
+): Promise<Course[]> => {
   try {
-    const response = await axiosWithBearer.get<PurchasedCourseModel[]>(
+    const response = await axiosWithBearer.get<Course[]>(
       `${enviroment.apiHost}/api/course/purchased/${userId}`
     );
     return response.data;
@@ -46,9 +59,9 @@ export const getPurchasedCourses = async (
 
 export const getSinglePurchasedCourse = async (
   courseId: number
-): Promise<PurchasedCourseModel> => {
+): Promise<Course> => {
   try {
-    const response = await axiosWithBearer.get<PurchasedCourseModel>(
+    const response = await axiosWithBearer.get<Course>(
       `${enviroment.apiHost}/api/course/single-purchased/${courseId}`
     );
     return response.data;

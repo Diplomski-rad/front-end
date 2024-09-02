@@ -1,14 +1,12 @@
 import React, { useEffect, useState } from "react";
 import styles from "./purchased-courses.module.css";
-import PurchasedCourseModel from "../../model/PurchasedCourse";
 import { jwtDecode } from "jwt-decode";
 import { getPurchasedCourses } from "../../service/course-service";
 import PurchasedCourse from "./purchased-course/purchased-course";
+import Course from "../../model/Course";
 
 const PurchasedCourses: React.FC = () => {
-  const [purchasedCourses, setPurchasedCourses] = useState<
-    PurchasedCourseModel[]
-  >([]);
+  const [purchasedCourses, setPurchasedCourses] = useState<Course[]>([]);
 
   const token = localStorage.getItem("token");
 

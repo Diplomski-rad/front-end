@@ -3,14 +3,14 @@ import styles from "./purchased-course-overview.module.css";
 import { useLocation } from "react-router-dom";
 import Video from "../../../model/Video";
 import { getSinglePurchasedCourse } from "../../../service/course-service";
-import PurchasedCourseModel from "../../../model/PurchasedCourse";
 import PurchasedCourseVideo from "./purchased-course-video/purchased-course-video";
+import Course from "../../../model/Course";
 
 const PurchasedCourseOverview: React.FC = () => {
   const location = useLocation();
   const { courseId } = location.state as { courseId: number };
 
-  const [course, setCourse] = useState<PurchasedCourseModel>();
+  const [course, setCourse] = useState<Course>();
 
   const [videos, setVideos] = useState<Video[]>([]);
 

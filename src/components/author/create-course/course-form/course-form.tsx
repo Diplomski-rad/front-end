@@ -2,9 +2,8 @@ import React, { useState } from "react";
 import "./course-form.css";
 import CreateCourseModel from "../../../model/createCourseModel";
 import { jwtDecode } from "jwt-decode";
-import axiosWithBearer from "../../../../infrastructure/auth/jwt/jwt.interceptor";
-import { enviroment } from "../../../../env/enviroment";
 import { useNavigate } from "react-router-dom";
+import { addCourse } from "../../../service/course-service";
 
 const CourseForm: React.FC = () => {
   const navigate = useNavigate();
@@ -29,13 +28,10 @@ const CourseForm: React.FC = () => {
         description: courseDescription,
         authorId: decodedToken?.id,
       };
-      const response = await axiosWithBearer.post(
-        enviroment.apiHost + "/api/course/create",
-        model
-      );
+      addCourse(model);
       navigate("/my-courses-dashboard");
     } catch (err: any) {
-      console.log("An unexpected error occurred");
+      console.log("An error occurred while creating course");
     }
   };
 

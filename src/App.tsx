@@ -4,7 +4,6 @@ import Home from "./components/shared/home/home";
 import Navbar from "./components/shared/navbar/navbar";
 import VideoPlayer from "./components/video_player/video_player";
 import { Route, BrowserRouter as Router, Routes } from "react-router-dom";
-import VideoUploader from "./components/video-uploader/video-uploader";
 import Login from "./infrastructure/auth/login/login";
 import Registration from "./infrastructure/auth/registration/registration";
 import CourseForm from "./components/author/create-course/course-form/course-form";
@@ -18,7 +17,7 @@ import SuccessfulPayment from "./components/user/successful-payment-page/success
 import PurchasedCourses from "./components/user/purchased-courses/purchased-courses";
 import PurchasedCourseOverview from "./components/user/purchased-courses/purchased-course-overview/purchased-course-overview";
 import PublishCourse from "./components/author/my-courses/course-details/publish-course/publish-course";
-import { Bounce, Flip, ToastContainer } from "react-toastify";
+import { Flip, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
 function App() {
@@ -52,7 +51,6 @@ function App() {
           />
 
           <Route path="/video-player" element={<VideoPlayer />}></Route>
-          <Route path="/video-uploader" element={<VideoUploader />}></Route>
         </Routes>
       </div>
       <ToastContainer

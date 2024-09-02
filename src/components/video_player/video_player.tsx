@@ -7,6 +7,8 @@ const VideoPlayer: React.FC = () => {
   const location = useLocation();
   const { videoId } = location.state as { videoId: string };
 
+  console.log(videoId);
+
   return (
     <div className="video-container">
       <div>
