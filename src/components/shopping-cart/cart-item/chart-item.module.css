@@ -1,0 +1,94 @@
+.chart-item-container{
+    padding: 2%;
+    display: flex;
+    flex-direction: row;
+    background-color: whitesmoke;
+    margin-bottom: 2%;
+    height: 150px;
+    border-radius: 5px;
+}
+
+/* **************************************************************** */
+.image-container{
+    background : black;
+    flex: 2;
+}
+
+/* **************************************************************** */
+
+.text-container{
+    flex: 7;
+    padding-left: 1%;
+    display: flex;
+    flex-direction: column;
+}
+
+.text-container .header{
+    font-size: 32px;
+    font-weight: bold;
+}
+
+.text-container .author{
+    font-size: 18px;
+    font-style: italic;
+}
+
+.text-container .rating{
+    margin-top: auto;
+    margin-bottom: 1%;
+}
+
+
+
+/* **************************************************************** */
+
+
+.price-container{
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+}
+
+.price-container .remove{
+    margin-top: auto;
+    display: flex;
+    align-self: flex-end;
+    color: white;
+    border-radius: 5px;
+    padding: 3%;
+    padding-left: 10%;
+    padding-right: 10%;
+    background-color: maroon;
+    align-items: center;
+}
+
+.price-container .remove:hover{
+    cursor: pointer;
+}
+
+.price-container .remove .trash-bin {
+    height: 20px; /* Adjust the size of the trash bin icon as needed */
+    margin-right: 8px; /* Space between the icon and the text */
+}
+
+
+
+.price-container .price {
+    align-self: flex-end;
+    font-size: 32px;
+    font-weight: bold;
+    color: rgb(24, 22, 22);
+    background-color: rgb(214, 213, 213);
+    border-radius: 10px; /* More rounded corners */
+    padding: 2px 20px; /* Adjust padding for better spacing */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+    margin-bottom: 10px; /* Space above the "Remove" button */
+    transition: background-color 0.3s ease; /* Smooth transition on hover */
+}
+
+.price-container .price:hover {
+    cursor: default;
+}
+
+
+

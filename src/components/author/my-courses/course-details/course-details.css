@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Lobster&family=Raleway:wght@400;700&display=swap');
+
 .course-details-container {
     padding: 2%;
     display: flex;
@@ -64,6 +66,6 @@
     color: white;
     font-size: 24px;
     text-align: center;
-    font-family: 'Courier New', Courier, monospace;
+    font-family: 'Raleway', sans-serif;
     margin-top: 5%;
 }

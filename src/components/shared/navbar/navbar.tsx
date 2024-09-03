@@ -65,6 +65,10 @@ const Navbar: React.FC = () => {
     setIsDropdownOpen(false);
   };
 
+  const handleCartClick = () => {
+    navigate("/cart");
+  };
+
   const toggleDropdown = () => {
     setIsDropdownOpen(!isDropdownOpen);
   };
@@ -128,9 +132,11 @@ const Navbar: React.FC = () => {
       )}
 
       <div className={styles["right-group"]}>
-        <div className={styles["navbar-cart"]}>
-          <img src={cartImage} alt="" />
-        </div>
+        {!isAuthor && (
+          <div className={styles["navbar-cart"]} onClick={handleCartClick}>
+            <img src={cartImage} alt="" />
+          </div>
+        )}
         {isLoggedIn ? (
           <div
             className={`${styles["navbar-username-container"]} ${

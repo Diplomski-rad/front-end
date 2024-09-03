@@ -24,6 +24,8 @@ const PaymentSuccess: React.FC = () => {
           payerId,
         });
 
+        sessionStorage.removeItem("cart");
+
         navigate("/successful-payment");
       } catch (error) {
         console.error("Payment execution error", error);

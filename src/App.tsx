@@ -19,6 +19,7 @@ import PurchasedCourseOverview from "./components/user/purchased-courses/purchas
 import PublishCourse from "./components/author/my-courses/course-details/publish-course/publish-course";
 import { Flip, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import ShoppingCart from "./components/shopping-cart/shopping-cart";
 
 function App() {
   return (
@@ -30,6 +31,7 @@ function App() {
           <Route path="/" element={<Home />}></Route>
           <Route path="/login" element={<Login />}></Route>
           <Route path="/registration" element={<Registration />} />
+          <Route path="/cart" element={<ShoppingCart />} />
           {/* Author */}
           <Route
             path="/my-courses-dashboard"

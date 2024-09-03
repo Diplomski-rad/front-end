@@ -1,0 +1,46 @@
+@import url('https://fonts.googleapis.com/css2?family=Lobster&family=Raleway:wght@400;700&display=swap');
+
+.shopping-cart-container{
+    display: flex;
+    flex-direction: column;
+    padding: 2%;
+}
+
+.shopping-cart-container hr{
+    color: white;
+    width: 100%;
+}
+
+.shoping-cart-header{
+    color: white;
+}
+
+.shoping-cart-header h1{
+    font-size: 48px;
+    margin: 0px;
+}
+
+.middle-container{
+    display: flex;
+    flex-direction: row;
+    padding-top: 2%;
+}
+
+.items-container{
+    flex: 7;
+    padding-right: 2%;
+    border-right: 1px solid white;
+    overflow-y: auto; /* Enable vertical scrolling if content overflows */
+}
+
+.total-container{
+    flex: 3;
+}
+
+.empty-cart{
+    font-family: 'Raleway', sans-serif;
+    color: white;
+    font-size: 32px;
+    align-self: center;
+    margin-top: 3%;
+}

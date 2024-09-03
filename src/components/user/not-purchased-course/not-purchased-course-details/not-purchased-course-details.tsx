@@ -1,28 +1,30 @@
-import React, { useState } from "react";
+import React from "react";
 import styles from "./not-purchased-course-details.module.css";
 import Course from "../../../model/Course";
 import { useLocation } from "react-router-dom";
 import courseImage from "../../../../assets/course.jpg";
-import axiosWithBearer from "../../../../infrastructure/auth/jwt/jwt.interceptor";
-import Spinner from "../../../shared/Spinner/spinner";
+import { Flip, toast } from "react-toastify";
 
 const NotPurchasedCourseDetails: React.FC = () => {
   const location = useLocation();
-  const [isLoading, setIsLoading] = useState<boolean>(false);
 
   const { course } = location.state as { course: Course };
 
-  const createPayment = async () => {
-    setIsLoading(true);
-    try {
-      const response = await axiosWithBearer.post(
-        "http://localhost:5217/api/cart/create-payment",
-        { courseId: course.id }
-      );
-      window.location.href = response.data.approvalUrl;
-    } catch (error) {
-      console.error("Payment creation error", error);
-    }
+  const addToCart = () => {
+    const cart = JSON.parse(sessionStorage.getItem("cart") || "[]");
+    cart.push(course);
+    sessionStorage.setItem("cart", JSON.stringify(cart));
+    toast.success("Course successfully added to cart", {
+      position: "bottom-right",
+      autoClose: 5000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: false,
+      draggable: false,
+      progress: undefined,
+      theme: "dark",
+      transition: Flip,
+    });
   };
 
   return (
@@ -40,9 +42,7 @@ const NotPurchasedCourseDetails: React.FC = () => {
           </div>
           <div className={styles["buy-container"]}>
             <div className={styles.price}>Price: ${course.price}</div>
-            <button onClick={createPayment} disabled={isLoading}>
-              {isLoading ? <Spinner /> : "Buy"}
-            </button>
+            <button onClick={addToCart}>Add to cart</button>
           </div>
         </div>
       </div>

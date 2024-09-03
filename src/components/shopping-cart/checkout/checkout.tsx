@@ -1,0 +1,44 @@
+import React, { useState } from "react";
+import styles from "./checkout.module.css";
+import axiosWithBearer from "../../../infrastructure/auth/jwt/jwt.interceptor";
+import Spinner from "../../shared/Spinner/spinner";
+import Course from "../../model/Course";
+
+interface CheckoutProps {
+  total: number;
+  courses: Course[];
+}
+
+const Checkout: React.FC<CheckoutProps> = ({ total, courses }) => {
+  const [isLoading, setIsLoading] = useState<boolean>(false);
+
+  const createPayment = async () => {
+    setIsLoading(true);
+    try {
+      const courseIds = courses.map((course) => course.id);
+      const response = await axiosWithBearer.post(
+        "http://localhost:5217/api/cart/create-payment",
+        { coursesIds: courseIds }
+      );
+      window.location.href = response.data.approvalUrl;
+    } catch (error) {
+      console.error("Payment creation error", error);
+    }
+  };
+
+  return (
+    <div className={styles["checkout-container"]}>
+      <div className={styles.total}>Total:</div>
+      <div className={styles.price}>${total.toFixed(2)}</div>
+      <button
+        className={styles["checkout-button"]}
+        disabled={isLoading}
+        onClick={createPayment}
+      >
+        {isLoading ? <Spinner /> : "Checkout"}
+      </button>
+    </div>
+  );
+};
+
+export default Checkout;
