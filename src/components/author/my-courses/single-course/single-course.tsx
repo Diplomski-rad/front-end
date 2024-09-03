@@ -15,22 +15,22 @@ const SingleCourse: React.FC<SingleCourseProps> = ({ course }) => {
     navigate("/course-details", { state: { course } });
   };
 
-  const convertStatus = (num: number): string => {
-    switch (num) {
-      case 1:
+  const convertStatus = (status: string): string => {
+    switch (status) {
+      case "PUBLISHED":
         return "Published";
-      case 2:
+      case "ARCHIVED":
         return "Archived";
       default:
         return "Drawft";
     }
   };
 
-  const getStatusClass = (status: number): string => {
+  const getStatusClass = (status: string): string => {
     switch (status) {
-      case 1:
+      case "PUBLISHED":
         return styles.published;
-      case 2:
+      case "ARCHIVED":
         return styles.archived;
       default:
         return styles.draft;

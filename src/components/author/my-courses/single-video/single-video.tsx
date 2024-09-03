@@ -11,10 +11,8 @@ interface SingleVideoProps {
 const SingleVideo: React.FC<SingleVideoProps> = ({ video }) => {
   const navigate = useNavigate();
 
-  const videoId = video.id;
-
   const handleVideoClick = () => {
-    navigate("/video-player", { state: { videoId } });
+    navigate("/video-player", { state: { video } });
   };
 
   return (

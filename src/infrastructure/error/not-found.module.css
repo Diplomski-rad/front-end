@@ -1,0 +1,17 @@
+.not-found-container{
+    display: flex;
+    flex-direction: column;
+    padding: 2%;
+    align-items: center;
+    color: white;
+    justify-content: center;
+    height: 80vh;
+}
+
+.ooops{
+    font-size: 48px;
+}
+
+.text{
+    font-size: 32px;
+}

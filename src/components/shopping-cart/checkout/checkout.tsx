@@ -3,6 +3,8 @@ import styles from "./checkout.module.css";
 import axiosWithBearer from "../../../infrastructure/auth/jwt/jwt.interceptor";
 import Spinner from "../../shared/Spinner/spinner";
 import Course from "../../model/Course";
+import { jwtDecode } from "jwt-decode";
+import { useNavigate } from "react-router-dom";
 
 interface CheckoutProps {
   total: number;
@@ -10,19 +12,33 @@ interface CheckoutProps {
 }
 
 const Checkout: React.FC<CheckoutProps> = ({ total, courses }) => {
+  const navigate = useNavigate();
   const [isLoading, setIsLoading] = useState<boolean>(false);
 
-  const createPayment = async () => {
-    setIsLoading(true);
+  const token = localStorage.getItem("token");
+
+  let decodedToken: any = null;
+  if (token) {
     try {
-      const courseIds = courses.map((course) => course.id);
-      const response = await axiosWithBearer.post(
-        "http://localhost:5217/api/cart/create-payment",
-        { coursesIds: courseIds }
-      );
-      window.location.href = response.data.approvalUrl;
-    } catch (error) {
-      console.error("Payment creation error", error);
+      decodedToken = jwtDecode(token);
+    } catch (error) {}
+  }
+
+  const createPayment = async () => {
+    if (decodedToken && decodedToken?.role === "User") {
+      setIsLoading(true);
+      try {
+        const courseIds = courses.map((course) => course.id);
+        const response = await axiosWithBearer.post(
+          "http://localhost:5217/api/cart/create-payment",
+          { coursesIds: courseIds }
+        );
+        window.location.href = response.data.approvalUrl;
+      } catch (error) {
+        console.error("Payment creation error", error);
+      }
+    } else {
+      navigate("/login");
     }
   };
 

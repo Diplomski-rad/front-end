@@ -1,4 +1,3 @@
-import React from "react";
 import "./App.css";
 import Home from "./components/shared/home/home";
 import Navbar from "./components/shared/navbar/navbar";
@@ -20,6 +19,8 @@ import PublishCourse from "./components/author/my-courses/course-details/publish
 import { Flip, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import ShoppingCart from "./components/shopping-cart/shopping-cart";
+import PrivateRoute from "./infrastructure/gurad/private-route";
+import NotFound from "./infrastructure/error/not-found";
 
 function App() {
   return (
@@ -29,30 +30,89 @@ function App() {
         <Routes>
           {/* Shared */}
           <Route path="/" element={<Home />}></Route>
+          <Route path="/not-found" element={<NotFound />}></Route>
           <Route path="/login" element={<Login />}></Route>
           <Route path="/registration" element={<Registration />} />
-          <Route path="/cart" element={<ShoppingCart />} />
-          {/* Author */}
-          <Route
-            path="/my-courses-dashboard"
-            element={<MyCoursesDashboard />}
-          />
-          <Route path="/course-details" element={<CourseDetails />} />
-          <Route path="/course-form" element={<CourseForm />} />
-          <Route path="/add-video" element={<AddVideo />} />
-          <Route path="/publish-course" element={<PublishCourse />} />
-          {/* User */}
           <Route path="/landing-page" element={<LandingPage />} />
           <Route path="/course-info" element={<NotPurchasedCourseDetails />} />
-          <Route path="/payment-success" element={<PaymentSuccess />} />
-          <Route path="/successful-payment" element={<SuccessfulPayment />} />
-          <Route path="/purchased-courses" element={<PurchasedCourses />} />
+          <Route path="/cart" element={<ShoppingCart />} />
+
           <Route
-            path="/purchased-courses-overview"
-            element={<PurchasedCourseOverview />}
+            path="/video-player"
+            element={
+              <PrivateRoute
+                roles={["User", "Author"]}
+                element={<VideoPlayer />}
+              />
+            }
+          ></Route>
+
+          {/* Author */}
+
+          <Route
+            path="/my-courses-dashboard"
+            element={
+              <PrivateRoute
+                roles={["Author"]}
+                element={<MyCoursesDashboard />}
+              />
+            }
+          />
+          <Route
+            path="/course-details"
+            element={
+              <PrivateRoute roles={["Author"]} element={<CourseDetails />} />
+            }
+          />
+          <Route
+            path="/course-form"
+            element={
+              <PrivateRoute
+                roles={["Author"]}
+                element={
+                  <PrivateRoute roles={["Author"]} element={<CourseForm />} />
+                }
+              />
+            }
+          />
+          <Route
+            path="/add-video"
+            element={<PrivateRoute roles={["Author"]} element={<AddVideo />} />}
+          />
+          <Route
+            path="/publish-course"
+            element={
+              <PrivateRoute roles={["Author"]} element={<PublishCourse />} />
+            }
           />
 
-          <Route path="/video-player" element={<VideoPlayer />}></Route>
+          {/* User */}
+
+          <Route
+            path="/purchased-courses"
+            element={
+              <PrivateRoute roles={["User"]} element={<PurchasedCourses />} />
+            }
+          />
+          <Route
+            path="/purchased-courses-overview"
+            element={
+              <PrivateRoute
+                roles={["User"]}
+                element={<PurchasedCourseOverview />}
+              />
+            }
+          />
+
+          <Route
+            path="/payment-success"
+            element={
+              <PrivateRoute roles={["User"]} element={<PaymentSuccess />} />
+            }
+          />
+          <Route path="/successful-payment" element={<SuccessfulPayment />} />
+
+          <Route path="*" element={<NotFound />} />
         </Routes>
       </div>
       <ToastContainer

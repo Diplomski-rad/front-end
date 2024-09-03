@@ -1,13 +1,14 @@
 import React, { useEffect, useState } from "react";
 import "./my-courses-dashboard.css";
 import SingleCourse from "../single-course/single-course";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import Course from "../../../model/Course";
 import { getCoursesByAuthor } from "../../../service/course-service";
 import { jwtDecode } from "jwt-decode";
 
 const MyCoursesDashboard: React.FC = () => {
   const navigate = useNavigate();
+  const location = useLocation(); //location in useEffect ensure reload after commming back from another page
 
   const [courses, setCourses] = useState<Course[]>([]);
 
@@ -32,7 +33,7 @@ const MyCoursesDashboard: React.FC = () => {
       }
     };
     fetchCourses();
-  }, [authorId]);
+  }, [authorId, location.key]);
 
   const handleNewCourseClick = () => {
     navigate("/course-form");

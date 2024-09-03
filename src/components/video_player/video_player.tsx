@@ -10,12 +10,18 @@ const VideoPlayer: React.FC = () => {
 
   return (
     <div className={styles["video-container"]}>
-      <div>
-        <div className={styles["title-container"]}>
-          <h1>{video.title}</h1>
+      {video ? (
+        <div>
+          <div className={styles["title-container"]}>
+            <h1>{video.title}</h1>
+          </div>
+          <DailymotionPlayer videoId={video.id} />
         </div>
-        <DailymotionPlayer videoId={video.id} />
-      </div>
+      ) : (
+        <div className={styles["error-container"]}>
+          Sorry, an unexpected error occurred, please try again later.
+        </div>
+      )}
     </div>
   );
 };

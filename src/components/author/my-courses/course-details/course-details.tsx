@@ -43,7 +43,7 @@ const CourseDetails: React.FC = () => {
         <div className="add-video-to-course" onClick={handleAddVideoClick}>
           +Add video to course
         </div>
-        {course.status === 0 && (
+        {course.status === "DRAFT" && course.videos.length > 0 && (
           <div className="add-video-to-course" onClick={handlePublishClick}>
             Publish a course
           </div>

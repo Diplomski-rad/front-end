@@ -6,7 +6,7 @@ interface Course {
   name: string;
   description: string;
   price: number;
-  status: number;
+  status: string;
   author: Author;
   videos: Video[];
 }

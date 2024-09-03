@@ -13,3 +13,10 @@
 .title-container h1{
   margin: 0px;
 }
+
+.error-container{
+  margin-top: 10%;
+  color: white;
+  font-size: 32px;
+  text-align: center;
+}
