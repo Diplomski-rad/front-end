@@ -3,6 +3,7 @@ import "./login.css";
 import { enviroment } from "../../../env/enviroment";
 import axiosWithBearer from "../jwt/jwt.interceptor";
 import { useNavigate } from "react-router-dom";
+import { jwtDecode } from "jwt-decode";
 
 const Login: React.FC = () => {
   const navigate = useNavigate();
@@ -30,8 +31,17 @@ const Login: React.FC = () => {
       //   })
       // );
 
+      let decodedToken: any = null;
       localStorage.setItem("token", token);
-      navigate("/");
+      if (token) {
+        decodedToken = jwtDecode(token);
+      }
+      if (decodedToken && decodedToken?.role === "Author") {
+        navigate("/my-courses-dashboard");
+      } else {
+        navigate("/");
+      }
+
       console.log("Login successful");
     } catch (err: any) {
       if (err.response) {
