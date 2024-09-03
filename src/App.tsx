@@ -29,7 +29,7 @@ function App() {
         <Navbar />
         <Routes>
           {/* Shared */}
-          <Route path="/" element={<Home />}></Route>
+          <Route path="/" element={<LandingPage />}></Route>
           <Route path="/not-found" element={<NotFound />}></Route>
           <Route path="/login" element={<Login />}></Route>
           <Route path="/registration" element={<Registration />} />

@@ -16,6 +16,12 @@ const ShoppingCart: React.FC = () => {
     return cartItems.reduce((total, course) => total + course.price, 0);
   };
 
+  const handleRemove = (id: number) => {
+    const updatedItems = cartItems.filter((item) => item.id !== id);
+    setCartItems(updatedItems);
+    sessionStorage.setItem("cart", JSON.stringify(updatedItems));
+  };
+
   return (
     <div className={styles["shopping-cart-container"]}>
       <div className={styles["shoping-cart-header"]}>
@@ -26,7 +32,11 @@ const ShoppingCart: React.FC = () => {
         <div className={styles["middle-container"]}>
           <div className={styles["items-container"]}>
             {cartItems.map((course) => (
-              <CartItem key={course.id} course={course} />
+              <CartItem
+                key={course.id}
+                course={course}
+                onRemove={handleRemove}
+              />
             ))}
           </div>
           <div className={styles["total-container"]}>

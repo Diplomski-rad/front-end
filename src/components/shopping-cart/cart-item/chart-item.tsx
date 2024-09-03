@@ -5,9 +5,10 @@ import Course from "../../model/Course";
 
 interface CartItemProps {
   course: Course;
+  onRemove: (id: number) => void;
 }
 
-const CartItem: React.FC<CartItemProps> = ({ course }) => {
+const CartItem: React.FC<CartItemProps> = ({ course, onRemove }) => {
   return (
     <div className={styles["chart-item-container"]}>
       <div className={styles["image-container"]}>a</div>
@@ -20,7 +21,7 @@ const CartItem: React.FC<CartItemProps> = ({ course }) => {
       </div>
       <div className={styles["price-container"]}>
         <div className={styles.price}>${course.price}</div>
-        <div className={styles.remove}>
+        <div className={styles.remove} onClick={() => onRemove(course.id)}>
           <img
             src={trashBinImage}
             alt="Remove"
