@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import "./add-video.css";
 import { jwtDecode } from "jwt-decode";
 import { addVideoToCourse } from "../../../service/course-service";
-import { useLocation, useNavigate, useParams } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import Course from "../../../model/Course";
 import Spinner from "../../../shared/Spinner/spinner";
 

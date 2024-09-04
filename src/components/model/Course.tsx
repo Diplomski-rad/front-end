@@ -1,4 +1,5 @@
 import Author from "./Author";
+import Category from "./Category";
 import Video from "./Video";
 
 interface Course {
@@ -9,6 +10,7 @@ interface Course {
   status: string;
   author: Author;
   videos: Video[];
+  categories: Category[];
 }
 
 export default Course;

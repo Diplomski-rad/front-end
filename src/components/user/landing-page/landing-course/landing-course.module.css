@@ -60,3 +60,23 @@
     border-radius: 20px;
     box-sizing: border-box;
 }
+
+.categories{
+    padding-top: 2%;
+    padding-bottom: 5%;
+    font-size: 24px;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+}
+
+.chip{
+    font-size: 42px;
+    margin-bottom: 5px;
+    background-color: red;
+    margin-right: 2%;
+}
+
+.chip:hover{
+    cursor: default;
+}

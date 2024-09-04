@@ -1,5 +1,6 @@
 import { enviroment } from "../../env/enviroment";
 import axiosWithBearer from "../../infrastructure/auth/jwt/jwt.interceptor";
+import Category from "../model/Category";
 import Course from "../model/Course";
 import CreateCourseModel from "../model/createCourseModel";
 import Video from "../model/Video";
@@ -48,6 +49,22 @@ export const searchCourses = async (query: string): Promise<Course[]> => {
     const response = await axiosWithBearer.get<Course[]>(
       `${enviroment.apiHost}/api/course/search`,
       { params: { query } }
+    );
+    return response.data;
+  } catch (error) {
+    console.error("Error fetching searched courses:", error);
+    throw error;
+  }
+};
+
+export const filterCourses = async (filter: {
+  DifficultyLevel: string;
+  Categories: Category[];
+}): Promise<Course[]> => {
+  try {
+    const response = await axiosWithBearer.post<Course[]>(
+      `${enviroment.apiHost}/api/course/filter`,
+      filter
     );
     return response.data;
   } catch (error) {

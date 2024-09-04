@@ -1,9 +1,21 @@
+@import url('https://fonts.googleapis.com/css2?family=Lobster&family=Raleway:wght@400;700&display=swap');
+
 .landingPageContainer{
     display: flex;
     flex-direction: column;
     padding: 2%;
-
 }
+
+.search-container{
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 2%;
+    padding: 2%;
+    padding-bottom: 1%;
+    background: radial-gradient(circle, #505155 , #282c34);
+    border-radius: 8px;
+}
+
 
 .courses{
     display: flex;
@@ -11,3 +23,25 @@
     flex-wrap: wrap;
     justify-content: flex-start;
 }
+
+.filter-container{
+    margin-top: 1%;
+    align-self: center;
+}
+
+.filter{
+    background-color: maroon;
+    padding: 15px;
+    color: white;
+    font-family: 'Raleway', sans-serif;
+    border-radius: 10px;
+    padding-left: 50px;
+    padding-right: 50px;
+    transition: background-color 0.3s, transform 0.3s;
+}
+
+.filter:hover{
+    cursor: pointer;
+    transform: scaleX(1.1)
+}
+
