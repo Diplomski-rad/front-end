@@ -3,6 +3,7 @@ import axiosWithBearer from "../../infrastructure/auth/jwt/jwt.interceptor";
 import Category from "../model/Category";
 import Course from "../model/Course";
 import CreateCourseModel from "../model/createCourseModel";
+import PublishCourseRequest from "../model/PublishCourseRequest";
 import Video from "../model/Video";
 
 export const addCourse = async (model: CreateCourseModel): Promise<number> => {
@@ -133,9 +134,7 @@ export const addVideoToCourse = async (formData: FormData): Promise<Course> => {
 
 export const publishCourse = async (
   courseId: number,
-  request: {
-    price: number;
-  }
+  request: PublishCourseRequest
 ): Promise<string> => {
   try {
     const response = await axiosWithBearer.put<string>(

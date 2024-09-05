@@ -4,6 +4,8 @@ import Course from "../../../model/Course";
 import courseImage from "../../../../assets/course.jpg";
 import { useNavigate } from "react-router-dom";
 import Chip from "@mui/material/Chip";
+import Rating from "@mui/material/Rating";
+import Typography from "@mui/material/Typography";
 
 interface LandingCourseProps {
   course: Course;
@@ -39,6 +41,24 @@ const LandingCourse: React.FC<LandingCourseProps> = ({ course }) => {
               key={category.id}
             />
           ))}
+        </div>
+        <div className={styles.rating}>
+          <Typography
+            component="legend"
+            sx={{
+              fontSize: "36px",
+              marginRight: "5px",
+            }}
+          >
+            4.5
+          </Typography>
+          <Rating
+            name="half-rating"
+            defaultValue={4.5}
+            precision={0.5}
+            size="large"
+            readOnly
+          />
         </div>
         <div className={styles.price}>${course.price}</div>
       </div>

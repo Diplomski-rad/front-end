@@ -14,19 +14,30 @@
     display: flex;
     flex-direction: column;
     background-color: white;
-    padding : 5%;
+    padding : 3%;
     border-radius: 10px;
+    width: 50%;
     
 }
 
-.form input{
-    border: 0.5px solid black;
+.input-container{
+    margin-top: 10px;
+    width: 90%;
 }
 
-.form button{
+.input-container input{
+    height: 55px;
+    width: 150px;
+}
+
+.input-container input:focus{
+    outline: none;
+}
+
+.publish-btn{
     align-self: center;
     margin-top: 10%;
-    padding: 3%;
+    padding: 2%;
     padding-left: 10%;
     padding-right: 10%;
     border-radius: 10px;
@@ -38,8 +49,21 @@
     border: 0px;
 }
 
-.form button:hover{
+.publish-btn:hover{
     cursor: pointer;
     transform: scale(1.05);
     outline: none;
 }
+
+.difficuty-level{
+    margin: 10px 0px 10px 0px;
+    padding: 0% 5%;
+    width: 100%;
+}
+
+.input-label{
+    margin-bottom: 5px;
+    font-size: 18px;
+    margin-top: 10px;
+}
+

@@ -59,11 +59,12 @@
     padding-right: 30px;
     border-radius: 20px;
     box-sizing: border-box;
+    margin-top: auto;
 }
 
 .categories{
     padding-top: 2%;
-    padding-bottom: 5%;
+    padding-bottom: 2%;
     font-size: 24px;
     display: flex;
     flex-direction: row;
@@ -79,4 +80,10 @@
 
 .chip:hover{
     cursor: default;
+}
+
+.rating{
+    display: flex;
+    flex-direction: row;
+    align-items: center
 }

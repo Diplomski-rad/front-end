@@ -5,6 +5,7 @@ import Video from "../../../model/Video";
 import { getSinglePurchasedCourse } from "../../../service/course-service";
 import PurchasedCourseVideo from "./purchased-course-video/purchased-course-video";
 import Course from "../../../model/Course";
+import rateIcon from "../../../../assets/rating.png";
 
 const PurchasedCourseOverview: React.FC = () => {
   const location = useLocation();
@@ -30,6 +31,12 @@ const PurchasedCourseOverview: React.FC = () => {
     <div className={styles["course-details-container"]}>
       <h1 className={styles["course-header"]}>{course?.name}</h1>
       <div className={styles["course-description"]}>{course?.description}</div>
+      <div className={styles["rate-course"]}>
+        <button>
+          <img src={rateIcon} alt="Rate icon" className={styles.icon} />
+          Rate course
+        </button>
+      </div>
       <div className={styles["course-videos"]}>
         {videos.map((video) => (
           <PurchasedCourseVideo key={video.id} video={video} />
