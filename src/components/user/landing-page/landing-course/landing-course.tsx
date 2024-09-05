@@ -42,24 +42,31 @@ const LandingCourse: React.FC<LandingCourseProps> = ({ course }) => {
             />
           ))}
         </div>
-        <div className={styles.rating}>
-          <Typography
-            component="legend"
-            sx={{
-              fontSize: "36px",
-              marginRight: "5px",
-            }}
-          >
-            4.5
-          </Typography>
-          <Rating
-            name="half-rating"
-            defaultValue={4.5}
-            precision={0.5}
-            size="large"
-            readOnly
-          />
-        </div>
+        {course.rating.totalRatings > 0 ? (
+          <div className={styles.rating}>
+            <Typography
+              component="legend"
+              sx={{
+                fontSize: "36px",
+                marginRight: "5px",
+              }}
+            >
+              {course.rating.averageRating}
+            </Typography>
+            <Rating
+              name="half-rating"
+              defaultValue={
+                course.rating.totalRatings > 0 ? course.rating.averageRating : 0
+              }
+              precision={0.1}
+              size="large"
+              readOnly
+            />
+          </div>
+        ) : (
+          <div>No ratings available</div>
+        )}
+
         <div className={styles.price}>${course.price}</div>
       </div>
     </div>

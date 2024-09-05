@@ -1,9 +1,11 @@
+import axios from "axios";
 import { enviroment } from "../../env/enviroment";
 import axiosWithBearer from "../../infrastructure/auth/jwt/jwt.interceptor";
 import Category from "../model/Category";
 import Course from "../model/Course";
 import CreateCourseModel from "../model/createCourseModel";
 import PublishCourseRequest from "../model/PublishCourseRequest";
+import Rating from "../model/Rating";
 import Video from "../model/Video";
 
 export const addCourse = async (model: CreateCourseModel): Promise<number> => {
@@ -144,6 +146,40 @@ export const publishCourse = async (
     return response.data;
   } catch (error) {
     console.error("Error adding video", error);
+    throw error;
+  }
+};
+
+export const addRating = async (rating: Rating): Promise<void> => {
+  try {
+    const response = await axiosWithBearer.post<void>(
+      `${enviroment.apiHost}/api/rating`,
+      rating
+    );
+    return response.data;
+  } catch (error) {
+    console.error("Error adding video", error);
+    throw error;
+  }
+};
+
+export const getUserCourseRating = async (
+  userId: number,
+  courseId: number
+): Promise<Rating> => {
+  try {
+    const response = await axiosWithBearer.get<Rating>(
+      `${enviroment.apiHost}/api/rating`,
+      {
+        params: {
+          userId,
+          courseId,
+        },
+      }
+    );
+    return response.data;
+  } catch (error) {
+    console.error("Error fetching rating:", error);
     throw error;
   }
 };

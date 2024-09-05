@@ -6,6 +6,7 @@ import { getSinglePurchasedCourse } from "../../../service/course-service";
 import PurchasedCourseVideo from "./purchased-course-video/purchased-course-video";
 import Course from "../../../model/Course";
 import rateIcon from "../../../../assets/rating.png";
+import Rate from "./rate/rate";
 
 const PurchasedCourseOverview: React.FC = () => {
   const location = useLocation();
@@ -14,6 +15,27 @@ const PurchasedCourseOverview: React.FC = () => {
   const [course, setCourse] = useState<Course>();
 
   const [videos, setVideos] = useState<Video[]>([]);
+
+  const [rateVisibility, setRateVisibility] = useState<boolean>(false);
+
+  const closeRateDialog = () => setRateVisibility(false);
+
+  const handleRateBtnClick = () => {
+    setRateVisibility(true);
+  };
+
+  const emptyCourse: Course = {
+    id: 0,
+    name: "",
+    description: "",
+    author: { name: "", surname: "", username: "" },
+    videos: [],
+    price: 0,
+    status: "default",
+    categories: [],
+    difficultyLevel: "",
+    rating: { averageRating: 0, totalRatings: 0, ratingBreakdown: {} },
+  };
 
   useEffect(() => {
     const fetchCourse = async () => {
@@ -32,7 +54,7 @@ const PurchasedCourseOverview: React.FC = () => {
       <h1 className={styles["course-header"]}>{course?.name}</h1>
       <div className={styles["course-description"]}>{course?.description}</div>
       <div className={styles["rate-course"]}>
-        <button>
+        <button onClick={handleRateBtnClick}>
           <img src={rateIcon} alt="Rate icon" className={styles.icon} />
           Rate course
         </button>
@@ -42,6 +64,9 @@ const PurchasedCourseOverview: React.FC = () => {
           <PurchasedCourseVideo key={video.id} video={video} />
         ))}
       </div>
+      {rateVisibility && (
+        <Rate onClose={closeRateDialog} course={course || emptyCourse} />
+      )}
     </div>
   );
 };

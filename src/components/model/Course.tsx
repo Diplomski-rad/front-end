@@ -1,5 +1,6 @@
 import Author from "./Author";
 import Category from "./Category";
+import CourseRatings from "./CourseRatings";
 import Video from "./Video";
 
 interface Course {
@@ -11,6 +12,8 @@ interface Course {
   author: Author;
   videos: Video[];
   categories: Category[];
+  rating: CourseRatings;
+  difficultyLevel: string;
 }
 
 export default Course;
