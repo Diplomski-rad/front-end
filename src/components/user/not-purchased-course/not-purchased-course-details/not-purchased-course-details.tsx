@@ -12,19 +12,35 @@ const NotPurchasedCourseDetails: React.FC = () => {
 
   const addToCart = () => {
     const cart = JSON.parse(sessionStorage.getItem("cart") || "[]");
-    cart.push(course);
-    sessionStorage.setItem("cart", JSON.stringify(cart));
-    toast.success("Course successfully added to cart", {
-      position: "bottom-right",
-      autoClose: 5000,
-      hideProgressBar: false,
-      closeOnClick: true,
-      pauseOnHover: false,
-      draggable: false,
-      progress: undefined,
-      theme: "dark",
-      transition: Flip,
-    });
+
+    const courseExists = cart.some((item: Course) => item.id === course.id);
+    if (courseExists) {
+      toast.error("Course is already in the cart", {
+        position: "bottom-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: false,
+        draggable: false,
+        progress: undefined,
+        theme: "dark",
+        transition: Flip,
+      });
+    } else {
+      cart.push(course);
+      sessionStorage.setItem("cart", JSON.stringify(cart));
+      toast.success("Course successfully added to cart", {
+        position: "bottom-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: false,
+        draggable: false,
+        progress: undefined,
+        theme: "dark",
+        transition: Flip,
+      });
+    }
   };
 
   return (

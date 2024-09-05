@@ -150,7 +150,10 @@ export const publishCourse = async (
   }
 };
 
-export const addRating = async (rating: Rating): Promise<void> => {
+export const addRating = async (rating: {
+  courseId: number;
+  ratingValue: number;
+}): Promise<void> => {
   try {
     const response = await axiosWithBearer.post<void>(
       `${enviroment.apiHost}/api/rating`,
@@ -164,7 +167,6 @@ export const addRating = async (rating: Rating): Promise<void> => {
 };
 
 export const getUserCourseRating = async (
-  userId: number,
   courseId: number
 ): Promise<Rating> => {
   try {
@@ -172,7 +174,6 @@ export const getUserCourseRating = async (
       `${enviroment.apiHost}/api/rating`,
       {
         params: {
-          userId,
           courseId,
         },
       }

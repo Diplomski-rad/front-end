@@ -3,12 +3,10 @@ import styles from "./rate.module.css";
 import Rating from "@mui/material/Rating";
 import Course from "../../../../model/Course";
 import { Flip, toast } from "react-toastify";
-import { jwtDecode } from "jwt-decode";
 import {
   addRating,
   getUserCourseRating,
 } from "../../../../service/course-service";
-import axios from "axios";
 
 interface RateProps {
   onClose: () => void;
@@ -17,20 +15,6 @@ interface RateProps {
 
 const Rate: React.FC<RateProps> = ({ onClose, course }) => {
   const [value, setValue] = useState<number | null>(null);
-
-  const token = localStorage.getItem("token");
-
-  let userId = 0;
-  let role = "";
-  let decodedToken: any = null;
-
-  if (token) {
-    try {
-      decodedToken = jwtDecode(token);
-    } catch (error) {}
-    userId = decodedToken?.id;
-    role = decodedToken?.role;
-  }
 
   const handleSubmit = async () => {
     if (!value) {
@@ -46,9 +30,8 @@ const Rate: React.FC<RateProps> = ({ onClose, course }) => {
         transition: Flip,
       });
     } else {
-      if (value && course.id !== 0 && userId !== 0 && role === "User") {
+      if (value && course.id !== 0) {
         await addRating({
-          userId: userId,
           courseId: course.id,
           ratingValue: value,
         });
@@ -87,7 +70,7 @@ const Rate: React.FC<RateProps> = ({ onClose, course }) => {
   useEffect(() => {
     const fetchRating = async () => {
       try {
-        const rating = await getUserCourseRating(userId, course.id);
+        const rating = await getUserCourseRating(course.id);
         if (rating) {
           setValue(rating.ratingValue);
         } else {
