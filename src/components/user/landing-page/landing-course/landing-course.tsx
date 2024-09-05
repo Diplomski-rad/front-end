@@ -51,7 +51,7 @@ const LandingCourse: React.FC<LandingCourseProps> = ({ course }) => {
                 marginRight: "5px",
               }}
             >
-              {course.rating.averageRating}
+              {course.rating.averageRating.toFixed(1)}
             </Typography>
             <Rating
               name="half-rating"
