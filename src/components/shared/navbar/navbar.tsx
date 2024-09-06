@@ -34,10 +34,6 @@ const Navbar: React.FC = () => {
     }
   };
 
-  // const handleVideoPlayerClick = () => {
-  //   navigate("/video-player");
-  // };
-
   const handleCoursesClick = () => {
     navigate("/landing-page");
   };
@@ -45,14 +41,6 @@ const Navbar: React.FC = () => {
   const handlePurchasedCoursesClick = () => {
     navigate("/purchased-courses");
   };
-
-  // const handleVideoUploaderClick = () => {
-  //   navigate("/video-uploader");
-  // };
-
-  // const handleCreateCourseClick = () => {
-  //   navigate("/course-form");
-  // };
 
   const handleMyCoursesClick = () => {
     navigate("/my-courses-dashboard");
@@ -64,7 +52,7 @@ const Navbar: React.FC = () => {
 
   const handleLogoutClick = () => {
     localStorage.removeItem("token");
-    dispatch(removeUser());
+    sessionStorage.clear();
     navigate("/login");
     setIsDropdownOpen(false);
   };

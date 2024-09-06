@@ -23,14 +23,6 @@ const Login: React.FC = () => {
 
       const token = response.data.token;
 
-      // dispatch(
-      //   setUser({
-      //     username: decodedToken.sub,
-      //     email: decodedToken.email,
-      //     role: decodedToken.role,
-      //   })
-      // );
-
       let decodedToken: any = null;
       localStorage.setItem("token", token);
       if (token) {

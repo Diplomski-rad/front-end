@@ -76,12 +76,10 @@ export const filterCourses = async (filter: {
   }
 };
 
-export const getPurchasedCourses = async (
-  userId: number
-): Promise<Course[]> => {
+export const getPurchasedCourses = async (): Promise<Course[]> => {
   try {
     const response = await axiosWithBearer.get<Course[]>(
-      `${enviroment.apiHost}/api/course/purchased/${userId}`
+      `${enviroment.apiHost}/api/course/purchased`
     );
     return response.data;
   } catch (error) {

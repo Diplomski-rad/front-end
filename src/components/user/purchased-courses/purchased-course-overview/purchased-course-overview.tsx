@@ -41,8 +41,10 @@ const PurchasedCourseOverview: React.FC = () => {
     const fetchCourse = async () => {
       try {
         const course = await getSinglePurchasedCourse(courseId);
-        setCourse(course);
-        setVideos(course.videos);
+        if (course) {
+          setCourse(course);
+          setVideos(course.videos);
+        }
       } catch (error) {
         console.error("Error fetching videos:", error);
       }

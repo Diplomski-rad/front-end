@@ -22,7 +22,7 @@ const PurchasedCourses: React.FC = () => {
   useEffect(() => {
     const fetchCourses = async () => {
       try {
-        const courses = await getPurchasedCourses(userId);
+        const courses = await getPurchasedCourses();
         setPurchasedCourses(courses);
       } catch (error) {
         console.error("Error fetching courses:", error);

@@ -6,6 +6,7 @@ import { useNavigate } from "react-router-dom";
 import Chip from "@mui/material/Chip";
 import Rating from "@mui/material/Rating";
 import Typography from "@mui/material/Typography";
+import { getSinglePurchasedCourse } from "../../../service/course-service";
 
 interface LandingCourseProps {
   course: Course;
@@ -14,8 +15,18 @@ interface LandingCourseProps {
 const LandingCourse: React.FC<LandingCourseProps> = ({ course }) => {
   const navigate = useNavigate();
 
-  const handleCourseClick = () => {
-    navigate("/course-info", { state: { course } });
+  const handleCourseClick = async () => {
+    if (!localStorage.getItem("token")) {
+      navigate("/course-info", { state: { course } });
+    } else {
+      const resCourse = await getSinglePurchasedCourse(course.id);
+      if (resCourse) {
+        const courseId = resCourse.id;
+        navigate("/purchased-courses-overview", { state: { courseId } });
+      } else {
+        navigate("/course-info", { state: { course } });
+      }
+    }
   };
 
   return (
