@@ -47,7 +47,7 @@ const MyCoursesDashboard: React.FC = () => {
       </div>
       <div className="my-dashboard">
         {courses.length === 0 ? (
-          <div className="no-videos-yet">
+          <div className="no-course-yet">
             It looks like you haven't created any courses yet. Start sharing
             your knowledge by creating your first course!
           </div>

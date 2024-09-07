@@ -11,8 +11,9 @@ interface SingleCourseProps {
 const SingleCourse: React.FC<SingleCourseProps> = ({ course }) => {
   const navigate = useNavigate();
 
+  const courseId = course.id;
   const handleDetailsClick = () => {
-    navigate("/course-details", { state: { course } });
+    navigate("/course-details", { state: { courseId } });
   };
 
   const convertStatus = (status: string): string => {

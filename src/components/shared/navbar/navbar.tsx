@@ -2,7 +2,6 @@ import React, { useEffect, useRef, useState } from "react";
 import styles from "./navbar.module.css";
 import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
-import { removeUser } from "../../../infrastructure/redux/slice/userSlice";
 import { jwtDecode } from "jwt-decode";
 import profileImage from "../../../assets/user.png";
 import cartImage from "../../../assets/grocery-store.png";

@@ -1,4 +1,3 @@
-import axios from "axios";
 import { enviroment } from "../../env/enviroment";
 import axiosWithBearer from "../../infrastructure/auth/jwt/jwt.interceptor";
 import Category from "../model/Category";
@@ -26,11 +25,23 @@ export const getCoursesByAuthor = async (
 ): Promise<Course[]> => {
   try {
     const response = await axiosWithBearer.get<Course[]>(
-      `${enviroment.apiHost}/api/course/author/${authorId}`
+      `${enviroment.apiHost}/api/course/author/courses/${authorId}`
     );
     return response.data;
   } catch (error) {
     console.error("Error fetching courses:", error);
+    throw error;
+  }
+};
+
+export const getAuthorCourse = async (courseId: number): Promise<Course> => {
+  try {
+    const response = await axiosWithBearer.get<Course>(
+      `${enviroment.apiHost}/api/course/author/${courseId}`
+    );
+    return response.data;
+  } catch (error) {
+    console.error("Error fetching course:", error);
     throw error;
   }
 };
@@ -139,6 +150,22 @@ export const publishCourse = async (
   try {
     const response = await axiosWithBearer.put<string>(
       `${enviroment.apiHost}/api/course/${courseId}/publish`,
+      request
+    );
+    return response.data;
+  } catch (error) {
+    console.error("Error adding video", error);
+    throw error;
+  }
+};
+
+export const updateNameAndDescription = async (
+  courseId: number,
+  request: { name: string; description: string }
+): Promise<string> => {
+  try {
+    const response = await axiosWithBearer.put<string>(
+      `${enviroment.apiHost}/api/course/${courseId}/update`,
       request
     );
     return response.data;

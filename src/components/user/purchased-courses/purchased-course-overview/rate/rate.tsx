@@ -81,7 +81,7 @@ const Rate: React.FC<RateProps> = ({ onClose, course }) => {
       }
     };
     fetchRating();
-  }, []);
+  }, [course.id]);
 
   return (
     <div className={styles["rate-overlay"]} onClick={onClose}>

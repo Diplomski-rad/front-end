@@ -4,6 +4,7 @@ import CreateCourseModel from "../../../model/createCourseModel";
 import { jwtDecode } from "jwt-decode";
 import { useNavigate } from "react-router-dom";
 import { addCourse } from "../../../service/course-service";
+import { Flip, toast } from "react-toastify";
 
 const CourseForm: React.FC = () => {
   const navigate = useNavigate();
@@ -29,6 +30,22 @@ const CourseForm: React.FC = () => {
         authorId: decodedToken?.id,
       };
       addCourse(model);
+
+      toast.success(
+        "Course created successfully! Please complete all sections to be able to publish it.",
+        {
+          position: "bottom-right",
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: false,
+          draggable: false,
+          progress: undefined,
+          theme: "dark",
+          transition: Flip,
+        }
+      );
+
       navigate("/my-courses-dashboard");
     } catch (err: any) {
       console.log("An error occurred while creating course");
