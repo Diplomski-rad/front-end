@@ -244,7 +244,7 @@ const CourseDetails: React.FC = () => {
           </div>
         ) : (
           course?.videos.map((video) => (
-            <SingleVideo key={video.id} video={video} />
+            <SingleVideo key={video.id} video={video} courseId={course.id} />
           ))
         )}
       </div>

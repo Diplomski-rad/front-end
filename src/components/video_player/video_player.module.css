@@ -20,3 +20,30 @@
   font-size: 32px;
   text-align: center;
 }
+
+
+.back{
+  display: flex;
+  color : white;
+  background-color: maroon;
+  width: fit-content;
+  padding: 10px 30px;
+  border: 0px;
+  border-radius: 5px;
+  font-size: 16px;
+  align-items: center;
+  transition: background-color 0.3s;
+}
+
+.back img{
+  margin-right: 10px;
+}
+
+.back:hover{
+  cursor: pointer;
+  background-color: rgb(141, 2, 2);
+}
+
+.video-container{
+  padding: 2%;
+}

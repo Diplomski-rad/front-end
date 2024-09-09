@@ -1,14 +1,12 @@
 import React, { useEffect, useRef, useState } from "react";
 import styles from "./navbar.module.css";
 import { useNavigate } from "react-router-dom";
-import { useDispatch } from "react-redux";
 import { jwtDecode } from "jwt-decode";
 import profileImage from "../../../assets/user.png";
 import cartImage from "../../../assets/grocery-store.png";
 
 const Navbar: React.FC = () => {
   const navigate = useNavigate();
-  const dispatch = useDispatch();
 
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const dropdownRef = useRef<HTMLDivElement | null>(null);
@@ -111,7 +109,14 @@ const Navbar: React.FC = () => {
 
       {isDropdownOpen && (
         <div className={styles["navbar-dropdown"]} ref={dropdownRef}>
-          <div className={styles["navbar-dropdown-item"]}>Profile</div>
+          <div
+            className={styles["navbar-dropdown-item"]}
+            onClick={() => {
+              navigate("/profile");
+            }}
+          >
+            Profile
+          </div>
 
           <div
             className={styles["navbar-dropdown-item"]}

@@ -1,17 +1,32 @@
 import React from "react";
 import styles from "./video_player.module.css";
 import DailymotionPlayer from "../dailymotion-player/dailymotion-player";
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import Video from "../model/Video";
+import backImage from "../../assets/back.png";
 
 const VideoPlayer: React.FC = () => {
+  const navigate = useNavigate();
   const location = useLocation();
-  const { video } = location.state as { video: Video };
+  const { video, courseId } = location.state as {
+    video: Video;
+    courseId: number;
+  };
+
+  const handleBackClick = () => {
+    navigate("/course-details", { state: { courseId } });
+  };
 
   return (
     <div className={styles["video-container"]}>
+      <div>
+        <button className={styles.back} onClick={handleBackClick}>
+          <img src={backImage} alt="Back" width={20} height={20} />
+          Back to course
+        </button>
+      </div>
       {video ? (
-        <div>
+        <div className={styles["video-container"]}>
           <div className={styles["title-container"]}>
             <h1>{video.title}</h1>
           </div>

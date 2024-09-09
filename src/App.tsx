@@ -21,6 +21,7 @@ import "react-toastify/dist/ReactToastify.css";
 import ShoppingCart from "./components/shopping-cart/shopping-cart";
 import PrivateRoute from "./infrastructure/gurad/private-route";
 import NotFound from "./infrastructure/error/not-found";
+import Profile from "./components/shared/profile/profile";
 
 function App() {
   return (
@@ -36,6 +37,7 @@ function App() {
           <Route path="/landing-page" element={<LandingPage />} />
           <Route path="/course-info" element={<NotPurchasedCourseDetails />} />
           <Route path="/cart" element={<ShoppingCart />} />
+          <Route path="/profile" element={<Profile />} />
 
           <Route
             path="/video-player"
