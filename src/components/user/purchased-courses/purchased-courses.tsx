@@ -35,7 +35,9 @@ const PurchasedCourses: React.FC = () => {
     <div className={styles["main-container"]}>
       <div className={styles["courses-container"]}></div>
       {purchasedCourses.length === 0 ? (
-        <div className="no-videos-yet">You have no purchased courses.</div>
+        <div className={styles["no-video-yet"]}>
+          You have no purchased courses.
+        </div>
       ) : (
         purchasedCourses.map((course) => (
           <PurchasedCourse key={course.id} course={course} />

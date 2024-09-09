@@ -9,5 +9,8 @@
 }
 
 .no-video-yet{
+    color: white;
+    font-size: 24px;
+    text-align: center;
     font-family: 'Raleway', sans-serif;
 }

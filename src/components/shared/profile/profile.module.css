@@ -4,7 +4,6 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    min-height: 100vh;
     color: white;
     font-family: 'Arial', sans-serif;
   }
@@ -29,8 +28,6 @@
     text-align: center;
   }
   
-  /* Content container */
-  .content {}
   
   /* Data row */
   .data-row {

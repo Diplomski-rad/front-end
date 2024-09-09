@@ -188,7 +188,7 @@ const Profile: FC = () => {
     <div className={styles["profile-container"]}>
       <div className={styles["profile-layout"]}>
         <div className={styles["page-header"]}>Profile</div>
-        <div className={styles.content}>
+        <div>
           <div className={styles["data-row"]}>
             <div>Name: </div>
             <input
