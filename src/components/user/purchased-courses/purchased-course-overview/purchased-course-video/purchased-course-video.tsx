@@ -1,8 +1,9 @@
 import React from "react";
 import styles from "./purchased-course-video.module.css";
-import videoThumbnailImage from "../../../../../assets/video_thumbnail.jpg";
+import video_default_image from "../../../../../assets/video_default.jpg";
 import Video from "../../../../model/Video";
 import { useNavigate } from "react-router-dom";
+import { enviroment } from "../../../../../env/enviroment";
 
 interface PurchasedCourseVideoProps {
   video: Video;
@@ -23,7 +24,14 @@ const PurchasedCourseVideo: React.FC<PurchasedCourseVideoProps> = ({
       onClick={handleVideoClick}
     >
       <div className={styles["video-thumbnail-container"]}>
-        <img src={videoThumbnailImage} alt="Video thumbnail" />
+        <img
+          src={
+            video.thumbnail
+              ? `${enviroment.apiHost}/images/${video.thumbnail}`
+              : video_default_image
+          }
+          alt="Video thumbnail"
+        />
       </div>
       <div className={styles["video-details-container"]}>
         <h1>{video.title}</h1>

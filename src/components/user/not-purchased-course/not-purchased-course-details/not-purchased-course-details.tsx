@@ -2,8 +2,9 @@ import React from "react";
 import styles from "./not-purchased-course-details.module.css";
 import Course from "../../../model/Course";
 import { useLocation } from "react-router-dom";
-import courseImage from "../../../../assets/course.jpg";
+import default_image from "../../../../assets/default.jpg";
 import { Flip, toast } from "react-toastify";
+import { enviroment } from "../../../../env/enviroment";
 
 const NotPurchasedCourseDetails: React.FC = () => {
   const location = useLocation();
@@ -47,7 +48,14 @@ const NotPurchasedCourseDetails: React.FC = () => {
     <div className={styles["not-purchased-container"]}>
       <div className={styles["course-header"]}>
         <div className={styles.image}>
-          <img src={courseImage} alt="thumbnail" />
+          <img
+            src={
+              course.thumbnail
+                ? `${enviroment.apiHost}/images/${course.thumbnail}`
+                : default_image
+            }
+            alt="thumbnail"
+          />
         </div>
         <div className={styles.title}>
           <h1>{course.name}</h1>

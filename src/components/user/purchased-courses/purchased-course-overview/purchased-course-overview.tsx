@@ -7,6 +7,8 @@ import PurchasedCourseVideo from "./purchased-course-video/purchased-course-vide
 import Course from "../../../model/Course";
 import rateIcon from "../../../../assets/rating.png";
 import Rate from "./rate/rate";
+import { enviroment } from "../../../../env/enviroment";
+import default_image from "../../../../assets/default.jpg";
 
 const PurchasedCourseOverview: React.FC = () => {
   const location = useLocation();
@@ -35,6 +37,7 @@ const PurchasedCourseOverview: React.FC = () => {
     categories: [],
     difficultyLevel: "",
     rating: { averageRating: 0, totalRatings: 0, ratingBreakdown: {} },
+    thumbnail: null,
   };
 
   useEffect(() => {
@@ -53,7 +56,26 @@ const PurchasedCourseOverview: React.FC = () => {
   }, [courseId]);
   return (
     <div className={styles["course-details-container"]}>
-      <h1 className={styles["course-header"]}>{course?.name}</h1>
+      <div className={styles["course-header"]}>
+        <div className={styles.image}>
+          <img
+            src={
+              course?.thumbnail
+                ? `${enviroment.apiHost}/images/${course.thumbnail}`
+                : default_image
+            }
+            alt="thumbnail"
+          />
+        </div>
+        <div className={styles.title}>
+          <h1>{course?.name}</h1>
+          <div className={styles.author}>
+            <h2>
+              Author: {course?.author.name} {course?.author.surname}
+            </h2>
+          </div>
+        </div>
+      </div>
       <div className={styles["course-description"]}>{course?.description}</div>
       <div className={styles["rate-course"]}>
         <button onClick={handleRateBtnClick}>

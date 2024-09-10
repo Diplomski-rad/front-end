@@ -209,3 +209,52 @@ export const getUserCourseRating = async (
     throw error;
   }
 };
+
+export const addThumbnailForCourse = async (
+  file: File,
+  courseId: number
+): Promise<string> => {
+  try {
+    const formData = new FormData();
+    formData.append("file", file);
+
+    const response = await axiosWithBearer.put<string>(
+      `${enviroment.apiHost}/api/course/${courseId}/thumbnail`,
+      formData,
+      {
+        headers: {
+          "Content-Type": "multipart/form-data",
+        },
+      }
+    );
+    return response.data;
+  } catch (error) {
+    console.error("Error changing thumbnail", error);
+    throw error;
+  }
+};
+
+export const addThumbnailForVideo = async (
+  file: File,
+  courseId: number,
+  videoId: string
+): Promise<Video> => {
+  try {
+    const formData = new FormData();
+    formData.append("file", file);
+
+    const response = await axiosWithBearer.put<Video>(
+      `${enviroment.apiHost}/api/course/${courseId}/video/${videoId}/thumbnail`,
+      formData,
+      {
+        headers: {
+          "Content-Type": "multipart/form-data",
+        },
+      }
+    );
+    return response.data;
+  } catch (error) {
+    console.error("Error changing thumbnail", error);
+    throw error;
+  }
+};

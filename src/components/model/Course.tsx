@@ -14,6 +14,7 @@ interface Course {
   categories: Category[];
   rating: CourseRatings;
   difficultyLevel: string;
+  thumbnail: string | null;
 }
 
 export default Course;

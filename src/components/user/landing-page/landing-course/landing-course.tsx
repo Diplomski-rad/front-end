@@ -1,12 +1,13 @@
 import React from "react";
 import styles from "./landing-course.module.css";
 import Course from "../../../model/Course";
-import courseImage from "../../../../assets/course.jpg";
+import default_image from "../../../../assets/default.jpg";
 import { useNavigate } from "react-router-dom";
 import Chip from "@mui/material/Chip";
 import Rating from "@mui/material/Rating";
 import Typography from "@mui/material/Typography";
 import { getSinglePurchasedCourse } from "../../../service/course-service";
+import { enviroment } from "../../../../env/enviroment";
 
 interface LandingCourseProps {
   course: Course;
@@ -32,7 +33,14 @@ const LandingCourse: React.FC<LandingCourseProps> = ({ course }) => {
   return (
     <div className={styles.landingCourseContainer} onClick={handleCourseClick}>
       <div className={styles.image}>
-        <img src={courseImage} alt="Course" />
+        <img
+          src={
+            course.thumbnail
+              ? enviroment.apiHost + "/images/" + course.thumbnail
+              : default_image
+          }
+          alt="Course"
+        />
       </div>
       <div className={styles.content}>
         <h1>{course.name}</h1>

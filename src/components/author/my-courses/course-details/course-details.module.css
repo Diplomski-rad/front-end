@@ -8,6 +8,21 @@
     min-height: 100vh; /* Ensure the container takes at least the full viewport height */
 }
 
+.top-container{
+    display: flex;
+    flex-direction: row;
+    padding-bottom: 1%;
+
+}
+
+.image_container{
+    flex: 1;
+}
+
+.image_container img{
+    border-radius: 5px;
+}
+
 
 
 .course-header {
@@ -19,7 +34,9 @@
 
 
 .course-header-container{
-    border-bottom: 1px solid white;
+    flex: 3;
+    margin-left: 1%;
+    margin-top: auto;
 }
 
 .course-header-container textarea{
@@ -53,7 +70,8 @@
     color: white;
     font-size: 20px;
     flex: 0 0 auto; /* Prevent the description from shrinking or growing */
-    border-bottom: 1px solid white;
+    border-radius: 10px;
+    background-color: #2e2e2e;
 }
 
 .course-videos {
@@ -68,6 +86,21 @@
     display: flex;
     flex-direction: row;
     justify-content: space-between;
+    margin-top: 15px;
+    border-bottom: 1px solid rgb(138, 137, 137);
+    padding-bottom: 1%;
+}
+
+.buttons-container div{
+    align-self: center;
+    
+    transition: background-color 0.1s, transform 0.1s;
+    color: white; 
+
+    &:hover{
+        cursor: pointer;
+        transform: scale(1.02);
+    }
 }
 
 
@@ -82,6 +115,7 @@
     font-size: 24px;
     transition: background-color 0.1s, transform 0.1s;
     color: white;
+    width: fit-content;
 
 }
 
@@ -89,28 +123,43 @@
     cursor: pointer;
     background-color: #4CAF50; 
     transform: scale(1.05);
+    
 }
 
 .publish-archive-course{
-    background-color: #45a049;
-    align-self: center;
+    background-color: maroon;
+    margin-left: auto;
     padding: 20px;
     border-radius: 10px;
-    margin: 20px;
+
     font-variant: small-caps;
     font-weight: bold;
     font-size: 24px;
+
+    &:hover{
+        background-color: rgb(160, 0, 0); 
+    }
+}
+
+
+.change-thumbnail{
+    background-color: #0056b3;
+    padding: 10px 20px;
+    border-radius: 5px;
+    font-size: 20px;align-self: center;
+    
     transition: background-color 0.1s, transform 0.1s;
-    color: white;
-    margin-left: auto;
+    color: white; 
 
+    &:hover{
+        background-color: #007BFF;
+        cursor: pointer;
+        transform: scale(1.02);
+    }  
 }
 
-.publish-archive-course:hover{
-    cursor: pointer;
-    background-color: #4CAF50; 
-    transform: scale(1.05);
-}
+
+
 
 .no-videos-yet{
     color: white;
@@ -157,4 +206,9 @@
 
 .edit-desc-btn-container{
     margin-top: 10px;
+}
+
+
+.file-upload{
+    display: none;
 }

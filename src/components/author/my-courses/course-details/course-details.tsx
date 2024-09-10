@@ -3,11 +3,14 @@ import { useLocation, useNavigate } from "react-router-dom";
 import styles from "./course-details.module.css";
 import SingleVideo from "../single-video/single-video";
 import {
+  addThumbnailForCourse,
   getAuthorCourse,
   updateNameAndDescription,
 } from "../../../service/course-service";
 import Course from "../../../model/Course";
-import { Flip, toast } from "react-toastify";
+import { makeToastNotification } from "../../../service/toast.service";
+import default_thumbnail from "../../../../assets/default.jpg";
+import { enviroment } from "../../../../env/enviroment";
 
 const CourseDetails: React.FC = () => {
   const location = useLocation();
@@ -23,6 +26,7 @@ const CourseDetails: React.FC = () => {
 
   const descriptionTextareaRef = useRef<HTMLTextAreaElement>(null);
   const nameTextareaRef = useRef<HTMLTextAreaElement>(null);
+  const fileInputRef = useRef<HTMLInputElement>(null);
 
   const [editDescriptionContent, setEditDescriptionContent] =
     useState<string>();
@@ -35,34 +39,6 @@ const CourseDetails: React.FC = () => {
 
   const toggleName = () => {
     setEditName(!editName);
-  };
-
-  const makeNotification = (content: string, success: boolean) => {
-    if (success) {
-      toast.success(content, {
-        position: "bottom-right",
-        autoClose: 5000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: false,
-        draggable: false,
-        progress: undefined,
-        theme: "dark",
-        transition: Flip,
-      });
-    } else {
-      toast.error(content, {
-        position: "bottom-right",
-        autoClose: 5000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: false,
-        draggable: false,
-        progress: undefined,
-        theme: "dark",
-        transition: Flip,
-      });
-    }
   };
 
   useEffect(() => {
@@ -120,12 +96,12 @@ const CourseDetails: React.FC = () => {
         const updatedCourse = await getAuthorCourse(courseId);
         setCourse(updatedCourse);
 
-        makeNotification("Description successfully changed", true);
+        makeToastNotification("Description successfully changed", true);
       } catch (err) {
-        makeNotification("Error while editing description", false);
+        makeToastNotification("Error while editing description", false);
       }
     } else {
-      makeNotification("The description cannot be empty", false);
+      makeToastNotification("The description cannot be empty", false);
     }
   };
 
@@ -141,44 +117,74 @@ const CourseDetails: React.FC = () => {
         const updatedCourse = await getAuthorCourse(courseId);
         setCourse(updatedCourse);
 
-        makeNotification("Name successfully changed", true);
+        makeToastNotification("Name successfully changed", true);
       } catch (err) {
-        makeNotification("Error while editing course name", false);
+        makeToastNotification("Error while editing course name", false);
       }
     } else {
-      makeNotification("Name cannot be empty", false);
+      makeToastNotification("Name cannot be empty", false);
+    }
+  };
+
+  const handleFileUpload = async (file: File) => {
+    try {
+      await addThumbnailForCourse(file, course?.id ?? 0);
+      makeToastNotification("Course thumbnail successfully changed.", true);
+      if (fileInputRef.current) {
+        fileInputRef.current.value = ""; // Reset the file input
+      }
+    } catch (error) {
+      makeToastNotification(
+        "Ann error occured while changing thumbnail, please try again later.",
+        false
+      );
+      if (fileInputRef.current) {
+        fileInputRef.current.value = ""; // Reset the file input
+      }
     }
   };
 
   return (
     <div className={styles["course-details-container"]}>
-      <div className={styles["course-header-container"]}>
-        {!editName ? (
-          <h1 className={styles["course-header"]}>{course?.name}</h1>
-        ) : (
-          <textarea
-            ref={nameTextareaRef}
-            defaultValue={course?.name}
-            rows={1}
-            onChange={(e) => {
-              setEditNameContent(e.target.value);
-            }}
+      <div className={styles["top-container"]}>
+        <div className={styles.image_container}>
+          <img
+            src={
+              course?.thumbnail
+                ? `${enviroment.apiHost}/images/${course.thumbnail}`
+                : default_thumbnail
+            }
+            alt="thumbnail"
           />
-        )}
+        </div>
+        <div className={styles["course-header-container"]}>
+          {!editName ? (
+            <h1 className={styles["course-header"]}>{course?.name}</h1>
+          ) : (
+            <textarea
+              ref={nameTextareaRef}
+              defaultValue={course?.name}
+              rows={1}
+              onChange={(e) => {
+                setEditNameContent(e.target.value);
+              }}
+            />
+          )}
 
-        {isEditable && (
-          <div>
-            {editName ? (
-              <button className={styles["edit-btn"]} onClick={saveName}>
-                Save
-              </button>
-            ) : (
-              <button className={styles["edit-btn"]} onClick={toggleName}>
-                Edit
-              </button>
-            )}
-          </div>
-        )}
+          {isEditable && (
+            <div>
+              {editName ? (
+                <button className={styles["edit-btn"]} onClick={saveName}>
+                  Save
+                </button>
+              ) : (
+                <button className={styles["edit-btn"]} onClick={toggleName}>
+                  Edit
+                </button>
+              )}
+            </div>
+          )}
+        </div>
       </div>
 
       <div className={styles["course-description"]}>
@@ -213,14 +219,22 @@ const CourseDetails: React.FC = () => {
         )}
       </div>
       <div className={styles["buttons-container"]}>
-        {isEditable && (
-          <div
-            className={styles["add-video-to-course"]}
-            onClick={handleAddVideoClick}
-          >
-            +Add video to course
-          </div>
-        )}
+        <label htmlFor="file-upload" className={styles["change-thumbnail"]}>
+          Change thumbnail
+        </label>
+        <input
+          id="file-upload"
+          ref={fileInputRef}
+          type="file"
+          accept="image/*"
+          onChange={(e) => {
+            const file = e.target.files?.[0];
+            if (file) {
+              handleFileUpload(file);
+            }
+          }}
+          className={styles["file-upload"]}
+        />
 
         {course?.status === "PUBLISHED" && (
           <div className={styles["publish-archive-course"]}>Archive course</div>
@@ -237,6 +251,14 @@ const CourseDetails: React.FC = () => {
       </div>
 
       <div className={styles["course-videos"]}>
+        {isEditable && (
+          <div
+            className={styles["add-video-to-course"]}
+            onClick={handleAddVideoClick}
+          >
+            +Add video to course
+          </div>
+        )}
         {course?.videos.length === 0 ? (
           <div className={styles["no-videos-yet"]}>
             <div>No videos yet. Add videos to enrich the course!</div>

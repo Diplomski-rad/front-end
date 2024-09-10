@@ -2,7 +2,8 @@ import React from "react";
 import styles from "./single-course.module.css";
 import Course from "../../../model/Course";
 import { useNavigate } from "react-router-dom";
-import authoCourseImage from "../../../../assets/author_course.jpg";
+import default_image from "../../../../assets/default.jpg";
+import { enviroment } from "../../../../env/enviroment";
 
 interface SingleCourseProps {
   course: Course;
@@ -42,7 +43,14 @@ const SingleCourse: React.FC<SingleCourseProps> = ({ course }) => {
     <div className={styles["single-course-container"]}>
       <div className={styles["course-content-container"]}>
         <div className={styles.image}>
-          <img src={authoCourseImage} alt="Course" />
+          <img
+            src={
+              course.thumbnail
+                ? enviroment.apiHost + "/images/" + course.thumbnail
+                : default_image
+            }
+            alt="Course"
+          />
         </div>
         <div className={styles["course-text-container"]}>
           <div className={`${styles.status} ${getStatusClass(course.status)}`}>

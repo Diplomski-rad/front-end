@@ -35,3 +35,32 @@
     object-fit: cover;
 }
 
+.edit-options{
+    display: flex;
+    flex-direction: row;
+    margin-top: auto;
+    justify-content: center;
+    color: rgb(116, 116, 116);
+    &:hover{
+        cursor: default;
+    }
+}
+
+.edit-options-item{
+
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    &:hover{
+        cursor: pointer;
+    }
+}
+
+.edit-options-item img{
+    margin-right: 5px;
+}
+
+.file-upload{
+    display: none;
+}
+
