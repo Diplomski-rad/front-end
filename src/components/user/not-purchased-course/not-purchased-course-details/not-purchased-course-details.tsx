@@ -5,6 +5,8 @@ import { useLocation } from "react-router-dom";
 import default_image from "../../../../assets/default.jpg";
 import { Flip, toast } from "react-toastify";
 import { enviroment } from "../../../../env/enviroment";
+import Rating from "@mui/material/Rating";
+import Typography from "@mui/material/Typography";
 
 const NotPurchasedCourseDetails: React.FC = () => {
   const location = useLocation();
@@ -64,6 +66,32 @@ const NotPurchasedCourseDetails: React.FC = () => {
               Author: {course.author.name} {course.author.surname}
             </h2>
           </div>
+          {course.rating.totalRatings > 0 && (
+            <div className={styles.rating}>
+              <Typography
+                component="legend"
+                sx={{
+                  fontSize: "36px",
+                  marginRight: "5px",
+                  color: "white",
+                }}
+              >
+                {course.rating.averageRating.toFixed(1)}
+              </Typography>
+              <Rating
+                name="half-rating"
+                defaultValue={
+                  course.rating.totalRatings > 0
+                    ? course.rating.averageRating
+                    : 0
+                }
+                precision={0.1}
+                size="large"
+                readOnly
+                sx={{ fontSize: "42px" }}
+              />
+            </div>
+          )}
           <div className={styles["buy-container"]}>
             <div className={styles.price}>Price: ${course.price}</div>
             <button onClick={addToCart}>Add to cart</button>

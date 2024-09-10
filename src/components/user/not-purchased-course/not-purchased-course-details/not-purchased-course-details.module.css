@@ -29,6 +29,20 @@
     color: white;
 }
 
+.author h2{
+    margin: 0px;
+    font-style: italic;
+}
+
+.rating{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    margin-top: 10px;
+}
+
+
+
 .buy-container{
     padding-top: 2%;
     display: flex;
@@ -95,7 +109,3 @@
 
 
 
-.author h2{
-    margin: 0px;
-    font-style: italic;
-}
