@@ -4,6 +4,7 @@ import styles from "./course-details.module.css";
 import SingleVideo from "../single-video/single-video";
 import {
   addThumbnailForCourse,
+  archiveCourse,
   getAuthorCourse,
   getCourseVideos,
   updateNameAndDescription,
@@ -149,6 +150,21 @@ const CourseDetails: React.FC = () => {
     navigate("/publish-course", { state: { courseId } });
   };
 
+  const handleArchiveClick = async () => {
+    try {
+      if (course) {
+        await archiveCourse(course.id);
+        makeToastNotification("Course successfully archived", true);
+        navigate("/my-courses-dashboard");
+      }
+    } catch (error) {
+      makeToastNotification(
+        "Archiving failed, an error occurred while archiving",
+        false
+      );
+    }
+  };
+
   const saveDescription = async () => {
     setEditDesc(false);
     if (editDescriptionContent && editNameContent) {
@@ -249,6 +265,12 @@ const CourseDetails: React.FC = () => {
               )}
             </div>
           )}
+
+          {course?.status !== "DRAFT" && (
+            <div className={styles.price}>
+              <i>Price:</i> ${course?.price}
+            </div>
+          )}
         </div>
       </div>
 
@@ -302,10 +324,16 @@ const CourseDetails: React.FC = () => {
         />
 
         {course?.status === "PUBLISHED" && (
-          <div className={styles["publish-archive-course"]}>Archive course</div>
+          <div
+            className={styles["publish-archive-course"]}
+            onClick={handleArchiveClick}
+          >
+            Archive course
+          </div>
         )}
 
-        {course?.status === "DRAFT" && course.videos.length > 0 && (
+        {((course?.status === "DRAFT" && course.videos.length > 0) ||
+          course?.status === "ARCHIVED") && (
           <div
             className={styles["publish-archive-course"]}
             onClick={handlePublishClick}

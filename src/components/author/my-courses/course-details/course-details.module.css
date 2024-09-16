@@ -212,3 +212,8 @@
 .file-upload{
     display: none;
 }
+
+.price{
+    color: white;
+    font-size: 48px;
+}

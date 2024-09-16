@@ -69,6 +69,7 @@ const PublishCourse: React.FC = () => {
           id: option.id,
           name: option.name,
         }));
+
         publishCourse(courseId, {
           price: price,
           categories: categories,

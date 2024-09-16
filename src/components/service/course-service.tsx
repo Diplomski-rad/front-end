@@ -155,7 +155,19 @@ export const publishCourse = async (
     );
     return response.data;
   } catch (error) {
-    console.error("Error adding video", error);
+    console.error("Error publishing course", error);
+    throw error;
+  }
+};
+
+export const archiveCourse = async (courseId: number): Promise<string> => {
+  try {
+    const response = await axiosWithBearer.put<string>(
+      `${enviroment.apiHost}/api/course/${courseId}/archive`
+    );
+    return response.data;
+  } catch (error) {
+    console.error("Error archiving course", error);
     throw error;
   }
 };
