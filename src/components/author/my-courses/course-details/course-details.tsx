@@ -5,17 +5,27 @@ import SingleVideo from "../single-video/single-video";
 import {
   addThumbnailForCourse,
   getAuthorCourse,
+  getCourseVideos,
   updateNameAndDescription,
 } from "../../../service/course-service";
 import Course from "../../../model/Course";
 import { makeToastNotification } from "../../../service/toast.service";
 import default_thumbnail from "../../../../assets/default.jpg";
 import { enviroment } from "../../../../env/enviroment";
+import UploadingVideo from "./uploading-video/uploading-video";
+import Video from "../../../model/Video";
+import * as signalR from "@microsoft/signalr";
+import { link } from "fs";
 
 const CourseDetails: React.FC = () => {
   const location = useLocation();
   const navigate = useNavigate();
-  const { courseId } = location.state as { courseId: number };
+  const { courseId } = location.state as {
+    courseId: number;
+  };
+
+  const [videos, setVideos] = useState<Video[]>([]);
+  const [progLink, setProgLink] = useState<string | null>(null);
 
   const [course, setCourse] = useState<Course | null>(null);
 
@@ -41,6 +51,16 @@ const CourseDetails: React.FC = () => {
     setEditName(!editName);
   };
 
+  const fetchVideos = async () => {
+    try {
+      if (!courseId) {
+        navigate("/error");
+      }
+      const videos = await getCourseVideos(courseId);
+      setVideos(videos);
+    } catch (error) {}
+  };
+
   useEffect(() => {
     const fetchCourse = async () => {
       try {
@@ -54,7 +74,9 @@ const CourseDetails: React.FC = () => {
         setEditNameContent(course.name);
       } catch (error) {}
     };
+    setProgLink(sessionStorage.getItem("progressLink"));
     fetchCourse();
+    fetchVideos();
   }, []);
 
   useEffect(() => {
@@ -75,6 +97,50 @@ const CourseDetails: React.FC = () => {
       setCursorToEnd();
     }
   }, [editDesc, editName]);
+
+  // -----------------------------------Websocket------------------------------------------//
+  useEffect(() => {
+    // Nova SignalR konekcija
+
+    const token = localStorage.getItem("token");
+
+    if (token) {
+      const connection = new signalR.HubConnectionBuilder()
+        .withUrl("http://localhost:5217/courseHub")
+        .withAutomaticReconnect()
+        .build();
+
+      // Pokretanje konekcije
+      connection
+        .start()
+        .then(() => {
+          console.log("Connected to SignalR hub");
+
+          // Slušajte događaj "CourseUpdated" koji šalje backend
+          connection.on("CourseUpdated", (updatedCourseId) => {
+            if (updatedCourseId === courseId) {
+              setProgLink(null);
+              sessionStorage.removeItem("progressLink");
+              fetchVideos();
+            }
+          });
+
+          // connection.on("VideoPublished", (videoId) => {
+          //   fetchVideos;
+          // });
+        })
+        .catch((err) =>
+          console.error("Error while establishing connection: ", err)
+        );
+
+      // Očistite konekciju kada se komponenta unmount-uje
+      return () => {
+        connection.stop();
+      };
+    }
+  }, []);
+
+  //----------------------------------------------------------------------------------//
 
   const handleAddVideoClick = () => {
     navigate("/add-video", { state: { course } });
@@ -259,14 +325,15 @@ const CourseDetails: React.FC = () => {
             +Add video to course
           </div>
         )}
-        {course?.videos.length === 0 ? (
+        {progLink && <UploadingVideo link={progLink} />}
+        {videos.length === 0 ? (
           <div className={styles["no-videos-yet"]}>
             <div>No videos yet. Add videos to enrich the course!</div>
             <div>Add at least one video so you can publish your course.</div>
           </div>
         ) : (
-          course?.videos.map((video) => (
-            <SingleVideo key={video.id} video={video} courseId={course.id} />
+          videos.map((video) => (
+            <SingleVideo key={video.id} video={video} courseId={courseId} />
           ))
         )}
       </div>

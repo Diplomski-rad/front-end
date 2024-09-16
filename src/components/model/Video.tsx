@@ -3,6 +3,7 @@ interface Video {
   title: string;
   description: string;
   thumbnail: string | null;
+  isPublished: boolean;
 }
 
 export default Video;

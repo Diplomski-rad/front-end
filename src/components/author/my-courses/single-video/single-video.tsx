@@ -1,4 +1,4 @@
-import React, { useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import styles from "./single-video.module.css";
 import video_default_image from "../../../../assets/video_default.jpg";
 import Video from "../../../model/Video";
@@ -61,6 +61,9 @@ const SingleVideo: React.FC<SingleVideoProps> = ({ video, courseId }) => {
         />
       </div>
       <div className={styles["video-details-container"]}>
+        {!currentVideo.isPublished && (
+          <div className={styles.processing}>Proccessing...</div>
+        )}
         <h1>{currentVideo.title}</h1>
         <div>{currentVideo.description}</div>
         <div

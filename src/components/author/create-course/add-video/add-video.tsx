@@ -70,8 +70,10 @@ const AddVideo: React.FC = () => {
         formData.append("courseId", course.id.toString());
 
         try {
-          let course = await addVideoToCourse(formData);
-          navigate("/course-details", { state: { course } });
+          const progressLink = await addVideoToCourse(formData);
+          sessionStorage.setItem("progressLink", progressLink);
+          const courseId = course.id;
+          navigate("/course-details", { state: { courseId } });
         } catch (err: any) {
           console.log("An unexpected error occurred");
         } finally {

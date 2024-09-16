@@ -125,9 +125,9 @@ export const getCourseVideos = async (courseId: number): Promise<Video[]> => {
   }
 };
 
-export const addVideoToCourse = async (formData: FormData): Promise<Course> => {
+export const addVideoToCourse = async (formData: FormData): Promise<string> => {
   try {
-    const response = await axiosWithBearer.post<Course>(
+    const response = await axiosWithBearer.post<string>(
       `${enviroment.apiHost}/api/course/addvideo`,
       formData,
       {
@@ -136,6 +136,7 @@ export const addVideoToCourse = async (formData: FormData): Promise<Course> => {
         },
       }
     );
+    console.log(response.data);
     return response.data;
   } catch (error) {
     console.error("Error adding video", error);
