@@ -15,3 +15,11 @@
 .table-container{
     margin-top: 50px;
 }
+
+.radio-group-container{
+    align-self: center;
+    background-color: #3e3e3e;
+    margin-top: 1%;
+    padding: 0px 10%;
+    border-radius: 5px;
+}

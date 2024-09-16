@@ -94,6 +94,22 @@ export const getAllUsers = async (): Promise<User[]> => {
   }
 };
 
+export const searchUser = async (model: {
+  query: string;
+  flag: string;
+}): Promise<User[]> => {
+  try {
+    const response = await axiosWithBearer.post<User[]>(
+      `${enviroment.apiHost}/api/user/search`,
+      model
+    );
+    return response.data;
+  } catch (error) {
+    console.error("Error fetching user data", error);
+    throw error;
+  }
+};
+
 export const banUser = async (userId: number): Promise<number> => {
   try {
     const response = await axiosWithBearer.post<number>(
