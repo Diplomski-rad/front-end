@@ -1,13 +1,11 @@
 import React, { useState } from "react";
 import styles from "./searchbar.module.css";
-import { searchCourses } from "../../../service/course-service";
-import Course from "../../../model/Course";
 
 interface SearchbarProps {
-  setSearchResult: (courses: Course[]) => void;
+  setSearchQuery: (query: string) => void;
 }
 
-const Searchbar: React.FC<SearchbarProps> = ({ setSearchResult }) => {
+const Searchbar: React.FC<SearchbarProps> = ({ setSearchQuery }) => {
   const [query, setQuery] = useState("");
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -20,12 +18,7 @@ const Searchbar: React.FC<SearchbarProps> = ({ setSearchResult }) => {
 
   const handleSearch = async () => {
     if (!isEmptyOrWhitespace(query)) {
-      try {
-        const courses = await searchCourses(query);
-        setSearchResult(courses);
-      } catch (error) {
-        console.error("Error searching courses:", error);
-      }
+      setSearchQuery(query);
     }
   };
 

@@ -3,13 +3,25 @@ import styles from "./landing-page.module.css";
 import Searchbar from "./searchbar/searchbar";
 import LandingCourse from "./landing-course/landing-course";
 import Course from "../../model/Course";
-import { getPublishedCourses } from "../../service/course-service";
+import {
+  getPublishedCourses,
+  searchCourses,
+} from "../../service/course-service";
 import Filter from "./filter/filter";
 
 const LandingPage: React.FC = () => {
   const [courses, setCourses] = useState<Course[]>([]);
 
   const [isFilterVisible, setIsFilterVisible] = useState<boolean>(false);
+
+  const search = async (query: string) => {
+    try {
+      const courses = await searchCourses(query);
+      setCourses(courses);
+    } catch (error) {
+      console.error("Error searching courses:", error);
+    }
+  };
 
   useEffect(() => {
     const fetchCourses = async () => {
@@ -29,7 +41,7 @@ const LandingPage: React.FC = () => {
   return (
     <div className={styles.landingPageContainer}>
       <div className={styles["search-container"]}>
-        <Searchbar setSearchResult={setCourses} />
+        <Searchbar setSearchQuery={search} />
         <div className={styles["filter-container"]}>
           <div className={styles.filter} onClick={openFilter}>
             Filter

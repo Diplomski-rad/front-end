@@ -1,0 +1,77 @@
+.confirmation-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .confirmation-content {
+    background-color: white;
+    padding: 20px;
+    border-radius: 10px;
+    max-width: 400px;
+    width: 100%;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .header {
+    font-size: 24px;
+    font-weight: bold;
+    margin-bottom: 15px;
+  }
+  
+  .message {
+    margin-bottom: 20px;
+    font-size: 20px;
+  }
+  
+  .buttons {
+    display: flex;
+    justify-content: space-around;
+  }
+  
+  .confirm-btn,
+  .cancel-btn {
+    border: none;
+    border-radius: 5px;
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+  }
+  
+  .confirm-btn {
+    background-color: #4CAF50;
+    color: white;
+  }
+  
+  .confirm-btn:hover {
+    background-color: #45a049;
+  }
+  
+  .cancel-btn {
+    background-color: rgb(83, 83, 83);
+    color: white;
+  }
+  
+  .cancel-btn:hover {
+    background-color: rgb(87, 87, 87);
+  }
+  
+  .confirm-btn:disabled {
+    background-color: grey;
+    cursor: not-allowed;
+  }
+
+  .timer {
+    margin-bottom: 10px;
+    font-size: 18px;
+    color: red;
+  }

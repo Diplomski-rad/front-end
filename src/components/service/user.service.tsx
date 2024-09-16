@@ -1,5 +1,6 @@
 import { enviroment } from "../../env/enviroment";
 import axiosWithBearer from "../../infrastructure/auth/jwt/jwt.interceptor";
+import User from "../model/User";
 import UserDto from "../model/UserDto";
 
 export const updateUser = async (request: {
@@ -78,5 +79,41 @@ export const changeUserPassword = async (request: {
       }
     }
     throw new Error("Failed to change password. Please check your connection.");
+  }
+};
+
+export const getAllUsers = async (): Promise<User[]> => {
+  try {
+    const response = await axiosWithBearer.get<User[]>(
+      `${enviroment.apiHost}/api/user/all`
+    );
+    return response.data;
+  } catch (error) {
+    console.error("Error fetching user data", error);
+    throw error;
+  }
+};
+
+export const banUser = async (userId: number): Promise<number> => {
+  try {
+    const response = await axiosWithBearer.post<number>(
+      `${enviroment.apiHost}/api/user/${userId}/ban`
+    );
+    return response.data;
+  } catch (error) {
+    console.error("Error fetching user data", error);
+    throw error;
+  }
+};
+
+export const unbanUser = async (userId: number): Promise<number> => {
+  try {
+    const response = await axiosWithBearer.post<number>(
+      `${enviroment.apiHost}/api/user/${userId}/unban`
+    );
+    return response.data;
+  } catch (error) {
+    console.error("Error fetching user data", error);
+    throw error;
   }
 };

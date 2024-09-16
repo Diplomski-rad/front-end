@@ -22,6 +22,7 @@ const Navbar: React.FC = () => {
 
   const isAuthor = decodedToken?.role === "Author";
   const isUser = decodedToken?.role === "User";
+  const isAdmin = decodedToken?.role == "Admin";
 
   const handleHomeClick = () => {
     navigate("/");
@@ -37,6 +38,10 @@ const Navbar: React.FC = () => {
 
   const handleMyCoursesClick = () => {
     navigate("/my-courses-dashboard");
+  };
+
+  const handleUserManagmentClick = () => {
+    navigate("/user-managment");
   };
 
   const handleLoginClick = () => {
@@ -99,6 +104,15 @@ const Navbar: React.FC = () => {
         {isAuthor && (
           <div className={styles["navbar-item"]} onClick={handleMyCoursesClick}>
             my courses
+          </div>
+        )}
+
+        {isAdmin && (
+          <div
+            className={styles["navbar-item"]}
+            onClick={handleUserManagmentClick}
+          >
+            user managment
           </div>
         )}
       </div>

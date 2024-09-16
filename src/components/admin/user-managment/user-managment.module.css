@@ -1,0 +1,17 @@
+.user-managment-container{
+    padding: 2%;
+    display: flex;
+    flex-direction: column;
+}
+
+.user-managment-container h1{
+    color: white;
+    font-size: 48px;
+    font-variant: small-caps;
+    align-self: center;
+    margin-bottom: 2%;
+}
+
+.table-container{
+    margin-top: 50px;
+}

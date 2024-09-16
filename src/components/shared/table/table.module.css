@@ -1,0 +1,27 @@
+.ban-button{
+    padding: 10px 20px;
+    border-radius: 5px;
+    background-color: red;
+    color: white;
+    border: 0px;
+    transition: background-color 0.2s;
+
+    &:hover{
+        cursor: pointer;
+        background-color: rgb(177, 3, 3);
+    }
+}
+
+.unban-button{
+    padding: 10px 20px;
+    border-radius: 5px;
+    background-color: orange;
+    color: white;
+    border: 0px;
+    transition: background-color 0.2s;
+
+    &:hover{
+        cursor: pointer;
+        background-color: rgb(255, 153, 0)
+    }
+}

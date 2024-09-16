@@ -1,6 +1,5 @@
 import React, { FC, useEffect, useState } from "react";
 import styles from "./uploading-video.module.css";
-import video_default_image from "../../../../../assets/video_default.jpg";
 import CircularWithValueLabel from "../../../../shared/CircularProgressWithLabel/circular-progress-with-label";
 import axios from "axios";
 import Spinner from "../../../../shared/Spinner/spinner";

@@ -37,7 +37,17 @@ const Login: React.FC = () => {
       console.log("Login successful");
     } catch (err: any) {
       if (err.response) {
-        setError(err.response.data.message || "Login failed");
+        if (err.response.status === 403) {
+          // Handle 403 Forbidden specifically
+          setError(
+            "Your account has been banned. Please contact support for more informations."
+          );
+        } else if (err.response.status === 401) {
+          setError("Invalid username or password");
+        } else {
+          // Handle other response errors
+          setError(err.response.data.message || "Login failed");
+        }
       } else if (err.request) {
         setError("No response from server");
       } else {
