@@ -7,15 +7,17 @@ import { enviroment } from "../../../../../env/enviroment";
 
 interface PurchasedCourseVideoProps {
   video: Video;
+  courseId: number;
 }
 
 const PurchasedCourseVideo: React.FC<PurchasedCourseVideoProps> = ({
   video,
+  courseId,
 }) => {
   const navigate = useNavigate();
 
   const handleVideoClick = () => {
-    navigate("/video-player", { state: { video } });
+    navigate("/video-player", { state: { video, courseId } });
   };
 
   return (

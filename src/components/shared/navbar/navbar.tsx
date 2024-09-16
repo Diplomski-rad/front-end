@@ -24,11 +24,7 @@ const Navbar: React.FC = () => {
   const isUser = decodedToken?.role === "User";
 
   const handleHomeClick = () => {
-    if (isAuthor) {
-      navigate("/my-courses-dashboard");
-    } else {
-      navigate("/");
-    }
+    navigate("/");
   };
 
   const handleCoursesClick = () => {

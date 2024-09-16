@@ -22,6 +22,10 @@
     color: white;
 }
 
+.signup-line a{
+    color: rgb(25, 100, 240);
+}
+
 .login-input{
     font-size: 18px;
     width: 98%;

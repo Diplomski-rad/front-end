@@ -8,6 +8,7 @@ import Rating from "@mui/material/Rating";
 import Typography from "@mui/material/Typography";
 import { getSinglePurchasedCourse } from "../../../service/course-service";
 import { enviroment } from "../../../../env/enviroment";
+import { jwtDecode } from "jwt-decode";
 
 interface LandingCourseProps {
   course: Course;
@@ -16,8 +17,19 @@ interface LandingCourseProps {
 const LandingCourse: React.FC<LandingCourseProps> = ({ course }) => {
   const navigate = useNavigate();
 
+  const isLoggedIn = localStorage.getItem("token");
+
+  let decodedToken: any = null;
+  if (isLoggedIn) {
+    try {
+      decodedToken = jwtDecode(isLoggedIn);
+    } catch (error) {}
+  }
+
+  const isAuthor = decodedToken?.role === "Author";
+
   const handleCourseClick = async () => {
-    if (!localStorage.getItem("token")) {
+    if (!localStorage.getItem("token") || isAuthor) {
       navigate("/course-info", { state: { course } });
     } else {
       const resCourse = await getSinglePurchasedCourse(course.id);

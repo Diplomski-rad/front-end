@@ -22,6 +22,7 @@ import ShoppingCart from "./components/shopping-cart/shopping-cart";
 import PrivateRoute from "./infrastructure/gurad/private-route";
 import NotFound from "./infrastructure/error/not-found";
 import Profile from "./components/shared/profile/profile";
+import AuthorRegistration from "./infrastructure/auth/registration/author-registration";
 
 function App() {
   return (
@@ -34,6 +35,7 @@ function App() {
           <Route path="/not-found" element={<NotFound />}></Route>
           <Route path="/login" element={<Login />}></Route>
           <Route path="/registration" element={<Registration />} />
+          <Route path="/author-registration" element={<AuthorRegistration />} />
           <Route path="/landing-page" element={<LandingPage />} />
           <Route path="/course-info" element={<NotPurchasedCourseDetails />} />
           <Route path="/cart" element={<ShoppingCart />} />

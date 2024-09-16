@@ -85,7 +85,11 @@ const PurchasedCourseOverview: React.FC = () => {
       </div>
       <div className={styles["course-videos"]}>
         {videos.map((video) => (
-          <PurchasedCourseVideo key={video.id} video={video} />
+          <PurchasedCourseVideo
+            key={video.id}
+            video={video}
+            courseId={course?.id ?? 0}
+          />
         ))}
       </div>
       {rateVisibility && (

@@ -1,12 +1,11 @@
 import React, { useState } from "react";
-import "./registration.module.css";
-import axiosWithBearer from "../jwt/jwt.interceptor";
-import { enviroment } from "../../../env/enviroment";
-import { useNavigate } from "react-router-dom";
-import BasicUserRegistration from "../model/basicUserRegistration";
 import styles from "./registration.module.css";
+import { useNavigate } from "react-router-dom";
+import { enviroment } from "../../../env/enviroment";
+import axiosWithBearer from "../jwt/jwt.interceptor";
+import AuthorRegistrationModel from "../model/authorRegistrationModel";
 
-const Registration: React.FC = () => {
+const AuthorRegistration: React.FC = () => {
   const navigate = useNavigate();
 
   const [email, setEmail] = useState("");
@@ -15,9 +14,11 @@ const Registration: React.FC = () => {
   const [username, setUsername] = useState("");
   const [name, setName] = useState("");
   const [surname, setSurname] = useState("");
+  const [payPalEmail, setPayPalEmail] = useState("");
 
   const [passwordError, setPasswordError] = useState<string | null>(null);
   const [emailError, setEmailError] = useState<string | null>(null);
+  const [payPalEmailError, setPayPalEmailError] = useState<string | null>(null);
   const [nameError, setNameError] = useState<string | null>(null);
   const [surnameError, setSurnameError] = useState<string | null>(null);
   const [usernameError, setUsernameError] = useState<string | null>(null);
@@ -30,6 +31,7 @@ const Registration: React.FC = () => {
     setPasswordError(null);
     setUsernameError(null);
     setEmailError(null);
+    setPayPalEmailError(null);
     setConfirmationError(null);
     setNameError(null);
     setSurnameError(null);
@@ -45,7 +47,10 @@ const Registration: React.FC = () => {
     //Clear all old errors
     clearErrors();
 
-    if (!validateEmail(email)) {
+    if (email === "") {
+      setEmailError("Email is required");
+      return;
+    } else if (!validateEmail(email)) {
       setEmailError("Invalid email format.");
       return;
     } else if (username === "" || username === null) {
@@ -57,6 +62,12 @@ const Registration: React.FC = () => {
     } else if (surname === "" || surname === null) {
       setSurnameError("Last name is required");
       return;
+    } else if (payPalEmail === "") {
+      setPayPalEmailError("PayPal email is required.");
+      return;
+    } else if (!validateEmail(payPalEmail)) {
+      setPayPalEmailError("Invalid PayPal email format.");
+      return;
     } else if (password === "" || password === null || password.length < 8) {
       setPasswordError("Password must be at least 8 characters long");
       return;
@@ -65,23 +76,24 @@ const Registration: React.FC = () => {
       return;
     } else {
       try {
-        const registration: BasicUserRegistration = {
+        const registration: AuthorRegistrationModel = {
           name: name,
           surname: surname,
           username: username,
           email: email,
+          payPalEmail: payPalEmail,
           password: password,
         };
 
         const response = await axiosWithBearer.post(
-          enviroment.apiHost + "/auth/basic-user-registration",
+          enviroment.apiHost + "/auth/author-registration",
           registration
         );
 
         const token = response.data.token;
 
         localStorage.setItem("token", token);
-        navigate("/");
+        navigate("/my-courses-dashboard");
       } catch (err: any) {
         if (err.response) {
           const status = err.response.status;
@@ -108,7 +120,7 @@ const Registration: React.FC = () => {
   return (
     <div className={styles["registration-container"]}>
       <form className={styles["registration-form"]}>
-        <h1 className={styles["signup-header"]}>Sign up</h1>
+        <h1 className={styles["signup-header"]}>Sign up as author</h1>
         <div className={styles["input-container"]}>
           <div>First name</div>
           <input
@@ -157,7 +169,18 @@ const Registration: React.FC = () => {
             <div className={styles["error-message"]}>{emailError}</div>
           )}
         </div>
-
+        <div className={styles["input-container"]}>
+          <div>PayPal email</div>
+          <input
+            type="text"
+            className="login-input"
+            value={payPalEmail}
+            onChange={(e) => setPayPalEmail(e.target.value)}
+          />
+          {payPalEmailError && (
+            <div className={styles["error-message"]}>{payPalEmailError}</div>
+          )}
+        </div>
         <div className={styles["input-container"]}>
           <div>Password</div>
           <input
@@ -193,17 +216,8 @@ const Registration: React.FC = () => {
           {error && <div className={styles["error-message"]}>{error}</div>}
         </div>
       </form>
-      <div className={styles["author-registration"]}>
-        <div className={styles["signup-line"]}>
-          Interested in becoming an author? Share your knowledge and create your
-          own courses!
-        </div>
-        <div className={styles["signup-line"]}>
-          <a href="/author-registration">Register as an author here.</a>
-        </div>
-      </div>
     </div>
   );
 };
 
-export default Registration;
+export default AuthorRegistration;

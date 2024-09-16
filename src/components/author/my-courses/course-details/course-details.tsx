@@ -15,7 +15,6 @@ import { enviroment } from "../../../../env/enviroment";
 import UploadingVideo from "./uploading-video/uploading-video";
 import Video from "../../../model/Video";
 import * as signalR from "@microsoft/signalr";
-import { link } from "fs";
 
 const CourseDetails: React.FC = () => {
   const location = useLocation();

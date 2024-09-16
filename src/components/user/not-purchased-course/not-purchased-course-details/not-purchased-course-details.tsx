@@ -7,11 +7,23 @@ import { Flip, toast } from "react-toastify";
 import { enviroment } from "../../../../env/enviroment";
 import Rating from "@mui/material/Rating";
 import Typography from "@mui/material/Typography";
+import { jwtDecode } from "jwt-decode";
 
 const NotPurchasedCourseDetails: React.FC = () => {
   const location = useLocation();
 
   const { course } = location.state as { course: Course };
+
+  const isLoggedIn = localStorage.getItem("token");
+
+  let decodedToken: any = null;
+  if (isLoggedIn) {
+    try {
+      decodedToken = jwtDecode(isLoggedIn);
+    } catch (error) {}
+  }
+
+  const isAuthor = decodedToken?.role === "Author";
 
   const addToCart = () => {
     const cart = JSON.parse(sessionStorage.getItem("cart") || "[]");
@@ -94,7 +106,7 @@ const NotPurchasedCourseDetails: React.FC = () => {
           )}
           <div className={styles["buy-container"]}>
             <div className={styles.price}>Price: ${course.price}</div>
-            <button onClick={addToCart}>Add to cart</button>
+            {!isAuthor && <button onClick={addToCart}>Add to cart</button>}
           </div>
         </div>
       </div>

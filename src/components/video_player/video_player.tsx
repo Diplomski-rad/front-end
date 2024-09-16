@@ -4,6 +4,7 @@ import DailymotionPlayer from "../dailymotion-player/dailymotion-player";
 import { useLocation, useNavigate } from "react-router-dom";
 import Video from "../model/Video";
 import backImage from "../../assets/back.png";
+import { jwtDecode } from "jwt-decode";
 
 const VideoPlayer: React.FC = () => {
   const navigate = useNavigate();
@@ -13,8 +14,23 @@ const VideoPlayer: React.FC = () => {
     courseId: number;
   };
 
+  const isLoggedIn = localStorage.getItem("token");
+
+  let decodedToken: any = null;
+  if (isLoggedIn) {
+    try {
+      decodedToken = jwtDecode(isLoggedIn);
+    } catch (error) {}
+  }
+
+  const isAuthor = decodedToken?.role === "Author";
+
   const handleBackClick = () => {
-    navigate("/course-details", { state: { courseId } });
+    if (isAuthor) {
+      navigate("/course-details", { state: { courseId } });
+    } else {
+      navigate("/purchased-courses-overview", { state: { courseId } });
+    }
   };
 
   return (

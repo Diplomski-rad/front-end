@@ -19,7 +19,8 @@ const SingleVideo: React.FC<SingleVideoProps> = ({ video, courseId }) => {
   const fileInputRef = useRef<HTMLInputElement>(null);
 
   const handleVideoClick = () => {
-    navigate("/video-player", { state: { currentVideo, courseId } });
+    const video = currentVideo;
+    navigate("/video-player", { state: { video, courseId } });
   };
 
   const handleThumbnailUpload = async (file: File) => {
