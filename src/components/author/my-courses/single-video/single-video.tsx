@@ -73,7 +73,7 @@ const SingleVideo: React.FC<SingleVideoProps> = ({ video, courseId }) => {
         >
           <label
             className={styles["edit-options-item"]}
-            htmlFor="video-thumbnail-upload"
+            htmlFor={`${currentVideo.id} upload`}
           >
             <img
               src={thumbnail_option}
@@ -84,7 +84,7 @@ const SingleVideo: React.FC<SingleVideoProps> = ({ video, courseId }) => {
             Change thumbnail
           </label>
           <input
-            id="video-thumbnail-upload"
+            id={`${currentVideo.id} upload`}
             ref={fileInputRef}
             type="file"
             accept="image/*"
