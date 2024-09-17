@@ -11,7 +11,6 @@ import {
   getCategoryGroups,
 } from "../../service/category.service";
 import CategoryGroup from "../../model/CategoryGroup";
-import { CoPresentOutlined } from "@mui/icons-material";
 import { makeToastNotification } from "../../service/toast.service";
 
 const CategoryManagment: React.FC = () => {

@@ -43,6 +43,17 @@ const LandingCourse: React.FC<LandingCourseProps> = ({ course }) => {
     }
   };
 
+  const getDifficultyLevelClass = (difficultyLevel: string): string => {
+    switch (difficultyLevel) {
+      case "Beginner":
+        return styles.beginner;
+      case "Intermediate":
+        return styles.intermediate;
+      default:
+        return styles.advanced;
+    }
+  };
+
   return (
     <div className={styles.landingCourseContainer} onClick={handleCourseClick}>
       <div className={styles.image}>
@@ -74,6 +85,14 @@ const LandingCourse: React.FC<LandingCourseProps> = ({ course }) => {
             />
           ))}
         </div>
+        <div className={styles["difficulty-level"]}>
+          <i>Difficulty: </i>
+          <span
+            className={` ${getDifficultyLevelClass(course.difficultyLevel)}`}
+          >
+            {course.difficultyLevel}
+          </span>
+        </div>
         {course.rating.totalRatings > 0 ? (
           <div className={styles.rating}>
             <Typography
@@ -96,7 +115,9 @@ const LandingCourse: React.FC<LandingCourseProps> = ({ course }) => {
             />
           </div>
         ) : (
-          <div>No ratings available</div>
+          <div style={{ fontVariant: "small-caps", fontSize: "18px" }}>
+            no ratings yet
+          </div>
         )}
 
         <div className={styles.price}>${course.price}</div>
