@@ -1,4 +1,4 @@
-import React, { FC, useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import styles from "./user-managment.module.css";
 import Searchbar from "../../user/landing-page/searchbar/searchbar";
 
@@ -6,7 +6,6 @@ import Radio from "@mui/material/Radio";
 import RadioGroup from "@mui/material/RadioGroup";
 import FormControlLabel from "@mui/material/FormControlLabel";
 import FormControl from "@mui/material/FormControl";
-import FormLabel from "@mui/material/FormLabel";
 
 import CustomPaginationActionsTable from "../../shared/table/table";
 import { getAllUsers, searchUser } from "../../service/user.service";

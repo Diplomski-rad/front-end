@@ -24,6 +24,7 @@ const NotPurchasedCourseDetails: React.FC = () => {
   }
 
   const isAuthor = decodedToken?.role === "Author";
+  const isAdmin = decodedToken?.role === "Admin";
 
   const addToCart = () => {
     const cart = JSON.parse(sessionStorage.getItem("cart") || "[]");
@@ -106,7 +107,9 @@ const NotPurchasedCourseDetails: React.FC = () => {
           )}
           <div className={styles["buy-container"]}>
             <div className={styles.price}>Price: ${course.price}</div>
-            {!isAuthor && <button onClick={addToCart}>Add to cart</button>}
+            {!(isAuthor || isAdmin) && (
+              <button onClick={addToCart}>Add to cart</button>
+            )}
           </div>
         </div>
       </div>

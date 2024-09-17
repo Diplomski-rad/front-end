@@ -27,9 +27,10 @@ const LandingCourse: React.FC<LandingCourseProps> = ({ course }) => {
   }
 
   const isAuthor = decodedToken?.role === "Author";
+  const isAdmin = decodedToken?.role === "Admin";
 
   const handleCourseClick = async () => {
-    if (!localStorage.getItem("token") || isAuthor) {
+    if (!localStorage.getItem("token") || isAuthor || isAdmin) {
       navigate("/course-info", { state: { course } });
     } else {
       const resCourse = await getSinglePurchasedCourse(course.id);

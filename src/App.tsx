@@ -24,6 +24,7 @@ import NotFound from "./infrastructure/error/not-found";
 import Profile from "./components/shared/profile/profile";
 import AuthorRegistration from "./infrastructure/auth/registration/author-registration";
 import UserManagment from "./components/admin/user-managment/user-managment";
+import CategoryManagment from "./components/admin/category-managment/category-managment";
 
 function App() {
   return (
@@ -59,6 +60,13 @@ function App() {
             path="/user-managment"
             element={
               <PrivateRoute roles={["Admin"]} element={<UserManagment />} />
+            }
+          />
+
+          <Route
+            path="/category-managment"
+            element={
+              <PrivateRoute roles={["Admin"]} element={<CategoryManagment />} />
             }
           />
 

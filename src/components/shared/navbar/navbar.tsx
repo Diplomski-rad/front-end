@@ -22,7 +22,7 @@ const Navbar: React.FC = () => {
 
   const isAuthor = decodedToken?.role === "Author";
   const isUser = decodedToken?.role === "User";
-  const isAdmin = decodedToken?.role == "Admin";
+  const isAdmin = decodedToken?.role === "Admin";
 
   const handleHomeClick = () => {
     navigate("/");
@@ -42,6 +42,10 @@ const Navbar: React.FC = () => {
 
   const handleUserManagmentClick = () => {
     navigate("/user-managment");
+  };
+
+  const handleCategoryManagmentClick = () => {
+    navigate("/category-managment");
   };
 
   const handleLoginClick = () => {
@@ -115,6 +119,15 @@ const Navbar: React.FC = () => {
             user managment
           </div>
         )}
+
+        {isAdmin && (
+          <div
+            className={styles["navbar-item"]}
+            onClick={handleCategoryManagmentClick}
+          >
+            category managment
+          </div>
+        )}
       </div>
 
       {isDropdownOpen && (
@@ -138,7 +151,7 @@ const Navbar: React.FC = () => {
       )}
 
       <div className={styles["right-group"]}>
-        {!isAuthor && (
+        {!(isAuthor || isAdmin) && (
           <div className={styles["navbar-cart"]} onClick={handleCartClick}>
             <img src={cartImage} alt="" />
           </div>
