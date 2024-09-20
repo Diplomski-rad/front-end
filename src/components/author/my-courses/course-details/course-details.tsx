@@ -338,7 +338,7 @@ const CourseDetails: React.FC = () => {
             className={styles["publish-archive-course"]}
             onClick={handlePublishClick}
           >
-            Publish a course
+            Publish course
           </div>
         )}
       </div>

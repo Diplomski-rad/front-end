@@ -10,6 +10,8 @@
 .header-container{
     align-self: center;
     color: white;
+    font-variant: small-caps;
+    font-size: 42px;
 }
 
 .my-courses-dashboard-container .button-container button {

@@ -15,7 +15,7 @@
 .video-details-container{
     display: flex;
     flex-direction: column;
-    flex: 10;
+    flex: 11;
     margin-left: 20px;
 }
 
@@ -26,7 +26,7 @@
 
 .video-thumbnail-container{
     border: 0.5px solid black;
-    flex: 2;
+    flex: 3;
 }
 
 .video-thumbnail-container img{

@@ -33,6 +33,7 @@ const PurchasedCourses: React.FC = () => {
 
   return (
     <div className={styles["main-container"]}>
+      <h1 className={styles["page-header"]}>Purchased courses</h1>
       <div className={styles["courses-container"]}></div>
       {purchasedCourses.length === 0 ? (
         <div className={styles["no-video-yet"]}>

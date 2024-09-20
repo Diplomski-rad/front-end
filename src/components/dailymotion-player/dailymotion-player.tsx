@@ -27,16 +27,7 @@ const DailymotionPlayer: React.FC<DailymotionPlayerProps> = ({ videoId }) => {
 
   return (
     <div className={styles["dailymotion-player"]}>
-      {url ? ( // Conditionally render the iframe if the token is available
-        // <iframe
-        //   title="Dailymotion Video Player"
-        //   frameBorder="0"
-        //   width="100%"
-        //   height="800"
-        //   src={`https://www.dailymotion.com/embed/video/${videoId}?auth=${token}&enable_dm_logo=false`}
-        //   allow="autoplay; fullscreen"
-        //   allowFullScreen
-        // ></iframe>
+      {url ? (
         <iframe
           title="Video player"
           width="100%"

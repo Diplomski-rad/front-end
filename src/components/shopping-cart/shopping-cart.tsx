@@ -3,6 +3,7 @@ import styles from "./shopping-cart.module.css";
 import Checkout from "./checkout/checkout";
 import Course from "../model/Course";
 import CartItem from "./cart-item/chart-item";
+import CheckoutIcon from "../../assets/checkout.png";
 
 const ShoppingCart: React.FC = () => {
   const [cartItems, setCartItems] = useState<Course[]>([]);

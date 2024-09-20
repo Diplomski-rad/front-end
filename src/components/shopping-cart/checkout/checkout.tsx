@@ -5,6 +5,7 @@ import Spinner from "../../shared/Spinner/spinner";
 import Course from "../../model/Course";
 import { jwtDecode } from "jwt-decode";
 import { useNavigate } from "react-router-dom";
+import CheckoutIcon from "../../../assets/checkout.png";
 
 interface CheckoutProps {
   total: number;
@@ -51,6 +52,13 @@ const Checkout: React.FC<CheckoutProps> = ({ total, courses }) => {
         disabled={isLoading}
         onClick={createPayment}
       >
+        <img
+          width={25}
+          height={25}
+          src={CheckoutIcon}
+          alt="Checkout"
+          className={styles["trash-bin"]}
+        />
         {isLoading ? <Spinner /> : "Checkout"}
       </button>
     </div>
