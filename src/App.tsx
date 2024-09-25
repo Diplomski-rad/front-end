@@ -41,7 +41,13 @@ function App() {
           <Route path="/landing-page" element={<LandingPage />} />
           <Route path="/course-info" element={<NotPurchasedCourseDetails />} />
           <Route path="/cart" element={<ShoppingCart />} />
-          <Route path="/profile" element={<Profile />} />
+
+          <Route
+            path="/profile"
+            element={
+              <PrivateRoute roles={["User", "Author"]} element={<Profile />} />
+            }
+          />
 
           <Route
             path="/video-player"

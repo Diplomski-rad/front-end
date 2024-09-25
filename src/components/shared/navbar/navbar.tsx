@@ -90,11 +90,11 @@ const Navbar: React.FC = () => {
           home
         </div>
 
-        {isUser && (
+        {/* {isUser && (
           <div className={styles["navbar-item"]} onClick={handleCoursesClick}>
             courses
           </div>
-        )}
+        )} */}
 
         {isUser && (
           <div
@@ -132,14 +132,16 @@ const Navbar: React.FC = () => {
 
       {isDropdownOpen && (
         <div className={styles["navbar-dropdown"]} ref={dropdownRef}>
-          <div
-            className={styles["navbar-dropdown-item"]}
-            onClick={() => {
-              navigate("/profile");
-            }}
-          >
-            Profile
-          </div>
+          {!isAdmin && (
+            <div
+              className={styles["navbar-dropdown-item"]}
+              onClick={() => {
+                navigate("/profile");
+              }}
+            >
+              Profile
+            </div>
+          )}
 
           <div
             className={styles["navbar-dropdown-item"]}
